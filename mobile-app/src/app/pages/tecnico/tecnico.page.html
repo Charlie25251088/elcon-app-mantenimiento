@@ -1,0 +1,240 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Mantenimientos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <h1>Mis Mantenimientos</h1>
+
+  <p>
+    Consulte y actualice los mantenimientos asignados.
+  </p>
+
+  <!-- CARGANDO -->
+
+  <div
+    *ngIf="cargando"
+    class="loading">
+
+    <p>
+      Cargando mantenimientos...
+    </p>
+
+  </div>
+
+  <!-- ERROR -->
+
+  <div
+    *ngIf="mensajeError"
+    class="error-message">
+
+    {{ mensajeError }}
+
+  </div>
+
+  <!-- LISTA -->
+
+  <div
+    *ngIf="!cargando && mantenimientos.length > 0">
+
+    <ion-card
+      *ngFor="let mantenimiento of mantenimientos">
+
+      <ion-card-content>
+
+        <h2>
+          Mantenimiento #{{ mantenimiento.id }}
+        </h2>
+
+        <p>
+          <strong>Equipo:</strong>
+          {{ mantenimiento.equipo?.codigo || 'Equipo #' + mantenimiento.equipoId }}
+        </p>
+
+        <p *ngIf="mantenimiento.equipo?.nombre">
+          <strong>Nombre:</strong>
+          {{ mantenimiento.equipo.nombre }}
+        </p>
+
+        <p>
+          <strong>Fecha:</strong>
+          {{ mantenimiento.fecha | date:'dd/MM/yyyy HH:mm' }}
+        </p>
+
+        <p>
+          <strong>Tipo:</strong>
+          {{ mantenimiento.tipo }}
+        </p>
+
+        <p>
+          <strong>Descripción:</strong>
+          {{ mantenimiento.descripcion }}
+        </p>
+
+        <p>
+          <strong>Estado:</strong>
+          {{ mantenimiento.estado }}
+        </p>
+
+        <p *ngIf="mantenimiento.observaciones">
+          <strong>Observaciones:</strong>
+          {{ mantenimiento.observaciones }}
+        </p>
+
+        <ion-button
+          expand="block"
+          (click)="seleccionarMantenimiento(mantenimiento)">
+
+          ACTUALIZAR MANTENIMIENTO
+
+        </ion-button>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+  <!-- SIN MANTENIMIENTOS -->
+
+  <div
+    *ngIf="!cargando &&
+           mantenimientos.length === 0 &&
+           !mensajeError"
+    class="empty">
+
+    <h2>
+      No hay mantenimientos asignados
+    </h2>
+
+    <p>
+      Actualmente no tiene mantenimientos asignados.
+    </p>
+
+  </div>
+
+  <!-- FORMULARIO DE ACTUALIZACIÓN -->
+
+  <ion-card
+    *ngIf="mantenimientoSeleccionado">
+
+    <ion-card-content>
+
+      <h2>
+        Actualizar mantenimiento
+      </h2>
+
+      <p>
+        <strong>
+          Mantenimiento #{{ mantenimientoSeleccionado.id }}
+        </strong>
+      </p>
+
+      <p>
+        <strong>Equipo:</strong>
+        {{ mantenimientoSeleccionado.equipo?.nombre
+           || 'Equipo #' + mantenimientoSeleccionado.equipoId }}
+      </p>
+
+      <p>
+        <strong>Tipo:</strong>
+        {{ mantenimientoSeleccionado.tipo }}
+      </p>
+
+      <p>
+        <strong>Descripción:</strong>
+        {{ mantenimientoSeleccionado.descripcion }}
+      </p>
+
+      <!-- ESTADO -->
+
+      <ion-item>
+
+        <ion-label position="stacked">
+          Estado
+        </ion-label>
+
+        <ion-select
+          [(ngModel)]="mantenimientoSeleccionado.estado"
+          placeholder="Seleccione un estado">
+
+          <ion-select-option value="Programado">
+            Programado
+          </ion-select-option>
+
+          <ion-select-option value="En proceso">
+            En proceso
+          </ion-select-option>
+
+          <ion-select-option value="Completado">
+            Completado
+          </ion-select-option>
+
+          <ion-select-option value="Cancelado">
+            Cancelado
+          </ion-select-option>
+
+        </ion-select>
+
+      </ion-item>
+
+      <!-- OBSERVACIONES -->
+
+      <ion-item>
+
+        <ion-label position="stacked">
+          Observaciones
+        </ion-label>
+
+        <ion-textarea
+          [(ngModel)]="mantenimientoSeleccionado.observaciones"
+          placeholder="Ingrese observaciones">
+        </ion-textarea>
+
+      </ion-item>
+
+      <!-- GUARDAR -->
+
+      <ion-button
+        expand="block"
+        (click)="guardarCambios()"
+        [disabled]="guardando">
+
+        {{ guardando
+          ? 'GUARDANDO...'
+          : 'GUARDAR CAMBIOS'
+        }}
+
+      </ion-button>
+
+      <!-- CANCELAR -->
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="cancelarEdicion()"
+        [disabled]="guardando">
+
+        CANCELAR
+
+      </ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- CERRAR SESIÓN -->
+
+  <ion-button
+    expand="block"
+    color="danger"
+    fill="outline"
+    (click)="cerrarSesion()">
+
+    CERRAR SESIÓN
+
+  </ion-button>
+
+</ion-content>

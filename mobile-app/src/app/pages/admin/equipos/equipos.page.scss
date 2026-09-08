@@ -1,0 +1,45 @@
+h1 {
+  margin-bottom: 5px;
+}
+
+p {
+  color: #666;
+}
+
+ion-card {
+  margin-top: 20px;
+}
+
+ion-card h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+ion-button {
+  margin-top: 12px;
+}
+
+.loading {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.empty {
+  text-align: center;
+  margin: 50px 20px;
+}
+
+.empty h2 {
+  color: #333;
+}
+
+.error-message {
+  color: #d00000;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+}

@@ -1,0 +1,29 @@
+ion-card {
+  margin-top: 16px;
+}
+
+ion-card h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+ion-card p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.empty {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-top: 20px;
+  text-align: center;
+}

@@ -1,0 +1,257 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Empleados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- ENCABEZADO -->
+  <div class="header-section">
+
+    <div>
+      <h1>Empleados</h1>
+      <p>Gestiona los empleados registrados en el sistema.</p>
+    </div>
+
+    <ion-button
+      *ngIf="!mostrarFormulario"
+      (click)="abrirFormulario()">
+      + Nuevo empleado
+    </ion-button>
+
+  </div>
+
+
+  <!-- FORMULARIO NUEVO EMPLEADO -->
+  <ion-card *ngIf="mostrarFormulario">
+
+    <ion-card-content>
+
+      <!-- <h2>Nuevo empleado</h2>  -->
+
+      <h2>
+  {{ editando ? 'Editar empleado' : 'Nuevo empleado' }}
+    </h2>
+
+      <ion-item>
+        <ion-label position="stacked">
+          Nombre *
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="nuevoEmpleado.nombre"
+          placeholder="Ingrese el nombre">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">
+          Apellido *
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="nuevoEmpleado.apellido"
+          placeholder="Ingrese el apellido">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">
+          Cédula *
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="nuevoEmpleado.cedula"
+          placeholder="Ingrese la cédula">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">
+          Teléfono *
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="nuevoEmpleado.telefono"
+          placeholder="Ingrese el teléfono">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">
+          Email *
+        </ion-label>
+
+        <ion-input
+          type="email"
+          [(ngModel)]="nuevoEmpleado.email"
+          placeholder="Ingrese el correo">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">
+          ID usuario de Identity
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="nuevoEmpleado.applicationUserId"
+          placeholder="Opcional">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Empleado activo</ion-label>
+
+        <ion-toggle
+          [(ngModel)]="nuevoEmpleado.activo">
+        </ion-toggle>
+      </ion-item>
+
+
+      <!-- ERROR -->
+      <div
+        *ngIf="mensajeError"
+        class="error-message">
+
+        {{ mensajeError }}
+
+      </div>
+
+
+      <!-- BOTONES -->
+      <div class="form-buttons">
+
+        <ion-button
+          color="medium"
+          fill="outline"
+          (click)="cancelarFormulario()"
+          [disabled]="guardando">
+
+          Cancelar
+
+        </ion-button>
+
+        <ion-button
+          (click)="guardarEmpleado()"
+          [disabled]="guardando">
+
+          {{ guardando ? 'Guardando...' : 'Guardar empleado' }}
+
+        </ion-button>
+
+      </div>
+
+    </ion-card-content>
+
+  </ion-card>
+
+
+  <!-- CARGANDO -->
+  <div
+    *ngIf="cargando && empleados.length === 0"
+    class="loading">
+
+    <p>Cargando empleados...</p>
+
+  </div>
+
+
+  <!-- LISTA -->
+  <div *ngIf="empleados.length > 0">
+
+    <ion-card *ngFor="let empleado of empleados">
+
+      <ion-card-content>
+
+        <div class="empleado-info">
+
+          <div>
+
+            <h2>
+              {{ empleado.nombre }} {{ empleado.apellido }}
+            </h2>
+
+            <p>
+              <strong>Cédula:</strong>
+              {{ empleado.cedula }}
+            </p>
+
+            <p>
+              <strong>Teléfono:</strong>
+              {{ empleado.telefono }}
+            </p>
+
+            <p>
+              <strong>Email:</strong>
+              {{ empleado.email }}
+            </p>
+
+            <p>
+              <strong>Estado:</strong>
+              {{ empleado.activo ? 'Activo' : 'Inactivo' }}
+            </p>
+
+          </div>
+
+          <div class="acciones">
+          <!-- 
+            <ion-button fill="outline">
+              Editar
+            </ion-button>  LISTA -->
+
+            <ion-button
+             expand="block"
+            fill="outline"
+            (click)="editarEmpleado(empleado)">
+
+            EDITAR
+
+          </ion-button>
+
+            <ion-button
+              color="danger"
+              fill="outline"
+              (click)="eliminarEmpleado(empleado.id!)">
+
+              Eliminar
+
+            </ion-button>
+
+          </div>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+
+  <!-- SIN EMPLEADOS -->
+  <div
+    *ngIf="!cargando && empleados.length === 0"
+    class="empty">
+
+    <h2>No hay empleados registrados</h2>
+
+    <p>
+      Actualmente no existen empleados en el sistema.
+    </p>
+
+  </div>
+
+
+  <!-- VOLVER -->
+  <ion-button
+    expand="block"
+    fill="outline"
+    routerLink="/admin">
+
+    ← Volver al panel
+
+  </ion-button>
+
+</ion-content>

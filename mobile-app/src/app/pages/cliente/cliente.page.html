@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Mantenimientos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <h1>Mis Mantenimientos</h1>
+
+  <p>
+    Consulte los mantenimientos realizados y programados
+    de sus equipos.
+  </p>
+
+  <!-- CARGANDO -->
+
+  <div
+    *ngIf="cargando"
+    class="loading">
+
+    <p>
+      Cargando mantenimientos...
+    </p>
+
+  </div>
+
+  <!-- ERROR -->
+
+  <div
+    *ngIf="mensajeError"
+    class="error-message">
+
+    {{ mensajeError }}
+
+  </div>
+
+  <!-- LISTA -->
+
+  <div
+    *ngIf="!cargando && mantenimientos.length > 0">
+
+    <ion-card
+      *ngFor="let mantenimiento of mantenimientos">
+
+      <ion-card-content>
+
+        <h2>
+          Mantenimiento #{{ mantenimiento.id }}
+        </h2>
+
+        <p>
+            <!--<strong>Equipo ID:</strong>
+          {{ mantenimiento.equipoId }}-->
+
+          <strong>Equipo:</strong>
+          {{ mantenimiento.equipo?.nombre }}
+
+          <br>
+
+          <strong>Código:</strong>
+        {{ mantenimiento.equipo?.codigo }}
+        </p>
+
+        <p>
+          <strong>Fecha:</strong>
+          {{ mantenimiento.fecha | date:'dd/MM/yyyy HH:mm' }}
+        </p>
+
+        <p>
+          <strong>Tipo:</strong>
+          {{ mantenimiento.tipo }}
+        </p>
+
+        <p>
+          <strong>Descripción:</strong>
+          {{ mantenimiento.descripcion }}
+        </p>
+
+        <p>
+          <strong>Estado:</strong>
+          {{ mantenimiento.estado }}
+        </p>
+
+        <p *ngIf="mantenimiento.observaciones">
+
+          <strong>Observaciones:</strong>
+          {{ mantenimiento.observaciones }}
+
+        </p>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+  <!-- SIN MANTENIMIENTOS -->
+
+  <div
+    *ngIf="
+      !cargando &&
+      mantenimientos.length === 0 &&
+      !mensajeError
+    "
+    class="empty">
+
+    <h2>
+      No hay mantenimientos
+    </h2>
+
+    <p>
+      Actualmente no existen mantenimientos registrados
+      para sus equipos.
+    </p>
+
+  </div>
+
+  <!-- CERRAR SESIÓN -->
+
+  <ion-button
+    expand="block"
+    color="danger"
+    fill="outline"
+    (click)="cerrarSesion()">
+
+    CERRAR SESIÓN
+
+  </ion-button>
+
+</ion-content>

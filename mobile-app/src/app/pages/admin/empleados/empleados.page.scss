@@ -1,0 +1,92 @@
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  p {
+    color: #666;
+    margin-top: 0;
+  }
+}
+
+ion-card {
+  margin-bottom: 12px;
+}
+
+ion-card h2 {
+  margin-top: 0;
+}
+
+ion-item {
+  margin-bottom: 8px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-top: 15px;
+  padding: 10px;
+  background: #ffebee;
+  border-radius: 5px;
+}
+
+.empleado-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin: 6px 0;
+  }
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  margin: 50px 0;
+}
+
+@media (max-width: 700px) {
+
+  .header-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .empleado-info {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .acciones {
+    flex-direction: column;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+}

@@ -1,0 +1,31 @@
+.welcome {
+  text-align: center;
+  margin: 30px 0;
+
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  p {
+    color: #666;
+  }
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+ion-card {
+  margin: 0;
+  cursor: pointer;
+}
+
+ion-card-title {
+  font-size: 18px;
+}
+
+ion-button {
+  margin-top: 30px;
+}

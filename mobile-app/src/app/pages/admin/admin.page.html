@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Panel de Administrador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="welcome">
+    <h1>Elcon Mantenimiento</h1>
+    <p>Panel de administración</p>
+  </div>
+
+  <div class="menu-grid">
+
+    <ion-card (click)="irEmpleados()">
+      <ion-card-header>
+        <ion-card-title>👥 Empleados</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Gestionar empleados del sistema.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card (click)="irEquipos()">
+      <ion-card-header>
+        <ion-card-title>💻 Equipos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Gestionar equipos registrados.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card (click)="irMantenimientos()">
+      <ion-card-header>
+        <ion-card-title>🔧 Mantenimientos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Gestionar mantenimientos.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card (click)="irClientes()">
+      <ion-card-header>
+        <ion-card-title>👤 Clientes</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Consultar clientes registrados.
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <ion-button expand="block" color="danger">
+    Cerrar sesión
+  </ion-button>
+
+</ion-content>

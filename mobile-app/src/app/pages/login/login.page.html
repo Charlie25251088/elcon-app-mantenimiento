@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="login-container">
+
+    <h1>Elcon Mantenimiento</h1>
+
+    <p>Ingresa a tu cuenta</p>
+
+    <ion-item>
+      <ion-input
+        label="Correo electrónico"
+        labelPlacement="floating"
+        type="email"
+        [(ngModel)]="email">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Contraseña"
+        labelPlacement="floating"
+        type="password"
+        [(ngModel)]="password">
+      </ion-input>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      (click)="iniciarSesion()"
+      [disabled]="cargando">
+
+      <ion-spinner
+        *ngIf="cargando"
+        name="crescent">
+      </ion-spinner>
+
+      <span *ngIf="!cargando">
+        INICIAR SESIÓN
+      </span>
+
+    </ion-button>
+
+    <ion-text color="danger" *ngIf="error">
+      <p class="error">
+        {{ error }}
+      </p>
+    </ion-text>
+
+  </div>
+
+</ion-content>
