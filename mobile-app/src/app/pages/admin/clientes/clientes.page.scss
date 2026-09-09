@@ -1,0 +1,754 @@
+/* =========================
+   FONDO
+========================= */
+
+ion-content {
+  --background: #0756a8;
+}
+
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.clientes-page {
+  min-height: 100%;
+
+  padding: 18px 18px 25px;
+
+  background: linear-gradient(
+    180deg,
+    #0756a8 0%,
+    #0863b8 45%,
+    #0b69c7 100%
+  );
+}
+
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.page-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+
+  color: white;
+}
+
+
+.page-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: rgba(255, 255, 255, 0.75);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.1px;
+}
+
+
+.page-header h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 26px;
+
+  font-weight: 700;
+}
+
+
+.page-header p {
+  margin: 5px 0 0;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   BOTÓN NUEVO
+========================= */
+
+.new-button {
+  --background: floralwhite;
+
+  --color: #0756a8;
+
+  --border-radius: 10px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-card {
+  margin: 0 0 22px;
+
+  border-radius: 18px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+.form-card ion-card-content {
+  padding: 22px 18px;
+}
+
+
+/* =========================
+   CABECERA FORMULARIO
+========================= */
+
+.form-header {
+  margin-bottom: 18px;
+}
+
+
+.form-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #0756a8;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.form-header h2 {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 21px;
+
+  font-weight: 700;
+}
+
+
+.form-header p {
+  margin: 5px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.input-item {
+  --background: #ffffff;
+
+  --border-color: #dbe3ec;
+
+  --border-width: 1px;
+
+  --border-style: solid;
+
+  --border-radius: 10px;
+
+  --padding-start: 13px;
+
+  --inner-padding-end: 8px;
+
+  margin-bottom: 11px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+
+.input-item ion-label {
+  color: #334155 !important;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+.input-item ion-input {
+  --color: #1e293b;
+
+  --placeholder-color: #94a3b8;
+
+  --highlight-color-focused: #0756a8;
+}
+
+
+/* =========================
+   ESTADO
+========================= */
+
+.active-item {
+  --background: #ffffff;
+
+  --border-color: #dbe3ec;
+
+  --border-width: 1px;
+
+  --border-style: solid;
+
+  --border-radius: 10px;
+
+  --padding-start: 13px;
+
+  margin-top: 3px;
+
+  border-radius: 10px;
+}
+
+
+.active-item ion-label {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  color: #334155;
+}
+
+
+.active-item ion-label span {
+  color: #94a3b8;
+
+  font-size: 11px;
+
+  font-weight: 400;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error {
+  margin: 14px 0;
+
+  padding: 11px 13px;
+
+  border-radius: 9px;
+
+  background: #fee2e2;
+
+  border: 1px solid #fecaca;
+
+  color: #991b1b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   BOTONES FORMULARIO
+========================= */
+
+.acciones-formulario {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+
+.save-button {
+  --background: #0756a8;
+
+  --border-radius: 10px;
+
+  font-weight: 700;
+
+  flex: 1;
+}
+
+
+.cancel-button {
+  --border-radius: 10px;
+
+  font-weight: 600;
+
+  flex: 1;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+.clientes-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+}
+
+
+/* =========================
+   TARJETA CLIENTE
+========================= */
+
+.cliente-card {
+  margin: 0;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.09);
+
+  overflow: hidden;
+}
+
+
+.cliente-card ion-card-content {
+  padding: 17px;
+}
+
+
+/* =========================
+   INFORMACIÓN PRINCIPAL
+========================= */
+
+.cliente-main {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 13px;
+}
+
+
+/* =========================
+   ICONO CLIENTE
+========================= */
+
+.cliente-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 14px;
+
+  background: #eee4ff;
+
+  font-size: 23px;
+}
+
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.cliente-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+.cliente-title {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 8px;
+}
+
+
+.cliente-title h2 {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  line-height: 1.25;
+}
+
+
+/* =========================
+   ESTADO
+========================= */
+
+.estado {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 4px 8px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+
+.estado.activo {
+  background: #dcfce7;
+
+  color: #166534;
+}
+
+
+.estado.inactivo {
+  background: #fee2e2;
+
+  color: #991b1b;
+}
+
+
+/* =========================
+   DATOS
+========================= */
+
+.datos-cliente {
+  margin-top: 9px;
+}
+
+
+.datos-cliente p {
+  display: flex;
+
+  flex-direction: column;
+
+  margin: 6px 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  line-height: 1.3;
+}
+
+
+.datos-cliente strong {
+  margin-bottom: 1px;
+
+  color: #334155;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   ACCIONES
+========================= */
+
+.acciones {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 9px;
+
+  margin-top: 15px;
+
+  padding-top: 13px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+
+.acciones ion-button {
+  --border-radius: 9px;
+
+  margin: 0;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+.edit-button {
+  --color: #0756a8;
+
+  --border-color: #0756a8;
+}
+
+
+.delete-button {
+  --border-color: #dc2626;
+}
+
+
+/* =========================
+   CARGANDO
+========================= */
+
+.loading {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  color: white;
+
+  text-align: center;
+}
+
+
+.loading-icon {
+  font-size: 30px;
+
+  margin-bottom: 8px;
+}
+
+
+.loading p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   SIN CLIENTES
+========================= */
+
+.empty {
+  padding: 45px 20px;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  text-align: center;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.empty-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0 auto 12px;
+
+  border-radius: 16px;
+
+  background: #eee4ff;
+
+  font-size: 27px;
+}
+
+
+.empty h2 {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 18px;
+}
+
+
+.empty p {
+  margin: 7px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   VOLVER
+========================= */
+
+.back-button {
+  margin-top: 22px;
+
+  margin-bottom: 5px;
+
+  --color: white;
+
+  --border-color: rgba(255, 255, 255, 0.7);
+
+  --border-radius: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   TABLET / ESCRITORIO
+========================= */
+
+@media (min-width: 700px) {
+
+  .clientes-page {
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 25px;
+  }
+
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+
+  .clientes-list {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+  }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 500px) {
+
+  .page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .new-button {
+    width: 100%;
+
+    margin-top: 3px;
+  }
+
+
+  .form-card ion-card-content {
+    padding: 19px 15px;
+  }
+
+
+  .acciones-formulario {
+    flex-direction: column;
+  }
+
+
+  .save-button,
+  .cancel-button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================
+   CELULAR PEQUEÑO
+========================= */
+
+@media (max-width: 380px) {
+
+  .clientes-page {
+    padding: 14px 12px 22px;
+  }
+
+
+  .page-header h1 {
+    font-size: 23px;
+  }
+
+
+  .cliente-card ion-card-content {
+    padding: 15px;
+  }
+
+
+  .cliente-title h2 {
+    font-size: 16px;
+  }
+
+
+  .cliente-icon {
+    width: 44px;
+    height: 44px;
+
+    font-size: 21px;
+  }
+
+
+  .estado {
+    font-size: 9px;
+
+    padding: 4px 7px;
+  }
+
+}

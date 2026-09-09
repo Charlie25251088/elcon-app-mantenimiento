@@ -1,6 +1,18 @@
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>Empleados</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/admin"
+        text="">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Gestión de Empleados
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -11,30 +23,54 @@
 
     <div>
       <h1>Empleados</h1>
-      <p>Gestiona los empleados registrados en el sistema.</p>
+      <p>
+        Administra los empleados registrados en el sistema.
+      </p>
     </div>
+
+
+    
 
     <ion-button
       *ngIf="!mostrarFormulario"
-      (click)="abrirFormulario()">
-      + Nuevo empleado
+      (click)="abrirFormulario()"
+      class="nuevo-btn">
+
+      + NUEVO EMPLEADO
+
     </ion-button>
 
   </div>
 
 
-  <!-- FORMULARIO NUEVO EMPLEADO -->
-  <ion-card *ngIf="mostrarFormulario">
+  <!-- FORMULARIO -->
+  <ion-card
+    *ngIf="mostrarFormulario"
+    class="form-card">
 
     <ion-card-content>
 
-      <!-- <h2>Nuevo empleado</h2>  -->
+      <div class="form-header">
 
-      <h2>
-  {{ editando ? 'Editar empleado' : 'Nuevo empleado' }}
-    </h2>
+        <div>
+          <h2>
+            {{ editando ? 'Editar empleado' : 'Nuevo empleado' }}
+          </h2>
 
+          <p>
+            {{ editando
+              ? 'Actualice la información del empleado.'
+              : 'Ingrese los datos del nuevo empleado.'
+            }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- NOMBRE -->
       <ion-item>
+
         <ion-label position="stacked">
           Nombre *
         </ion-label>
@@ -43,9 +79,13 @@
           [(ngModel)]="nuevoEmpleado.nombre"
           placeholder="Ingrese el nombre">
         </ion-input>
+
       </ion-item>
 
+
+      <!-- APELLIDO -->
       <ion-item>
+
         <ion-label position="stacked">
           Apellido *
         </ion-label>
@@ -54,9 +94,13 @@
           [(ngModel)]="nuevoEmpleado.apellido"
           placeholder="Ingrese el apellido">
         </ion-input>
+
       </ion-item>
 
+
+      <!-- CÉDULA -->
       <ion-item>
+
         <ion-label position="stacked">
           Cédula *
         </ion-label>
@@ -65,9 +109,13 @@
           [(ngModel)]="nuevoEmpleado.cedula"
           placeholder="Ingrese la cédula">
         </ion-input>
+
       </ion-item>
 
+
+      <!-- TELÉFONO -->
       <ion-item>
+
         <ion-label position="stacked">
           Teléfono *
         </ion-label>
@@ -76,9 +124,13 @@
           [(ngModel)]="nuevoEmpleado.telefono"
           placeholder="Ingrese el teléfono">
         </ion-input>
+
       </ion-item>
 
+
+      <!-- EMAIL -->
       <ion-item>
+
         <ion-label position="stacked">
           Email *
         </ion-label>
@@ -86,11 +138,15 @@
         <ion-input
           type="email"
           [(ngModel)]="nuevoEmpleado.email"
-          placeholder="Ingrese el correo">
+          placeholder="Ingrese el correo electrónico">
         </ion-input>
+
       </ion-item>
 
+
+      <!-- ID IDENTITY -->
       <ion-item>
+
         <ion-label position="stacked">
           ID usuario de Identity
         </ion-label>
@@ -99,14 +155,27 @@
           [(ngModel)]="nuevoEmpleado.applicationUserId"
           placeholder="Opcional">
         </ion-input>
+
       </ion-item>
 
-      <ion-item>
-        <ion-label>Empleado activo</ion-label>
+
+      <!-- ESTADO -->
+      <ion-item class="toggle-item">
+
+        <ion-label>
+
+          Empleado activo
+
+          <p>
+            Indica si el empleado se encuentra actualmente activo.
+          </p>
+
+        </ion-label>
 
         <ion-toggle
           [(ngModel)]="nuevoEmpleado.activo">
         </ion-toggle>
+
       </ion-item>
 
 
@@ -124,12 +193,12 @@
       <div class="form-buttons">
 
         <ion-button
-          color="medium"
           fill="outline"
+          color="medium"
           (click)="cancelarFormulario()"
           [disabled]="guardando">
 
-          Cancelar
+          CANCELAR
 
         </ion-button>
 
@@ -137,7 +206,12 @@
           (click)="guardarEmpleado()"
           [disabled]="guardando">
 
-          {{ guardando ? 'Guardando...' : 'Guardar empleado' }}
+          {{ guardando
+            ? 'GUARDANDO...'
+            : (editando
+                ? 'ACTUALIZAR EMPLEADO'
+                : 'GUARDAR EMPLEADO')
+          }}
 
         </ion-button>
 
@@ -153,56 +227,110 @@
     *ngIf="cargando && empleados.length === 0"
     class="loading">
 
-    <p>Cargando empleados...</p>
+    <div class="loading-icon">
+      ⟳
+    </div>
+
+    <h3>
+      Cargando empleados...
+    </h3>
+
+    <p>
+      Espere un momento.
+    </p>
 
   </div>
 
 
   <!-- LISTA -->
-  <div *ngIf="empleados.length > 0">
+  <div
+    *ngIf="!cargando && empleados.length > 0"
+    class="empleados-grid">
 
-    <ion-card *ngFor="let empleado of empleados">
+    <ion-card
+      *ngFor="let empleado of empleados"
+      class="empleado-card">
 
       <ion-card-content>
 
-        <div class="empleado-info">
+        <!-- CABECERA -->
+        <div class="empleado-header">
 
-          <div>
+          <div class="empleado-icon">
+            👤
+          </div>
+
+          <div class="empleado-title">
 
             <h2>
               {{ empleado.nombre }} {{ empleado.apellido }}
             </h2>
 
-            <p>
-              <strong>Cédula:</strong>
-              {{ empleado.cedula }}
-            </p>
-
-            <p>
-              <strong>Teléfono:</strong>
-              {{ empleado.telefono }}
-            </p>
-
-            <p>
-              <strong>Email:</strong>
+            <span>
               {{ empleado.email }}
-            </p>
-
-            <p>
-              <strong>Estado:</strong>
-              {{ empleado.activo ? 'Activo' : 'Inactivo' }}
-            </p>
+            </span>
 
           </div>
 
-          <div class="acciones">
-          <!-- 
-            <ion-button fill="outline">
-              Editar
-            </ion-button>  LISTA -->
+          <span
+            class="estado-badge"
+            [class.inactivo]="!empleado.activo">
 
-            <ion-button
-             expand="block"
+            {{ empleado.activo ? 'Activo' : 'Inactivo' }}
+
+          </span>
+
+        </div>
+
+
+        <!-- INFORMACIÓN -->
+        <div class="empleado-info">
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Cédula
+            </span>
+
+            <strong>
+              {{ empleado.cedula }}
+            </strong>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Teléfono
+            </span>
+
+            <span>
+              {{ empleado.telefono }}
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Correo
+            </span>
+
+            <span>
+              {{ empleado.email }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACCIONES -->
+        <div class="acciones">
+
+          <ion-button
             fill="outline"
             (click)="editarEmpleado(empleado)">
 
@@ -210,16 +338,14 @@
 
           </ion-button>
 
-            <ion-button
-              color="danger"
-              fill="outline"
-              (click)="eliminarEmpleado(empleado.id!)">
+          <ion-button
+            color="danger"
+            fill="outline"
+            (click)="eliminarEmpleado(empleado.id!)">
 
-              Eliminar
+            ELIMINAR
 
-            </ion-button>
-
-          </div>
+          </ion-button>
 
         </div>
 
@@ -232,14 +358,38 @@
 
   <!-- SIN EMPLEADOS -->
   <div
-    *ngIf="!cargando && empleados.length === 0"
+    *ngIf="!cargando && empleados.length === 0 && !mensajeError"
     class="empty">
 
-    <h2>No hay empleados registrados</h2>
+    <div class="empty-icon">
+      👤
+    </div>
+
+    <h2>
+      No hay empleados registrados
+    </h2>
 
     <p>
       Actualmente no existen empleados en el sistema.
     </p>
+
+    <ion-button
+      fill="outline"
+      (click)="abrirFormulario()">
+
+      REGISTRAR EMPLEADO
+
+    </ion-button>
+
+  </div>
+
+
+  <!-- ERROR -->
+  <div
+    *ngIf="mensajeError && !mostrarFormulario"
+    class="error-message">
+
+    {{ mensajeError }}
 
   </div>
 
@@ -248,9 +398,10 @@
   <ion-button
     expand="block"
     fill="outline"
-    routerLink="/admin">
+    routerLink="/admin"
+    class="volver-btn">
 
-    ← Volver al panel
+    ← VOLVER AL PANEL
 
   </ion-button>
 

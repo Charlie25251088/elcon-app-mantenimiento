@@ -1,58 +1,516 @@
-<ion-header>
+<!--<ion-header>
   <ion-toolbar>
-    <ion-title>Panel de Administrador</ion-title>
+    <ion-title>
+      Panel de Administrador
+    </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header>-->
 
-<ion-content class="ion-padding">
 
-  <div class="welcome">
-    <h1>Elcon Mantenimiento</h1>
-    <p>Panel de administración</p>
+<ion-content>
+
+  <div class="dashboard">
+
+
+    <!-- =========================
+         CABECERA PRINCIPAL
+    ========================== -->
+
+    <div class="dashboard-header">
+
+      <div class="brand-area">
+
+        <img
+          src="assets/icon/logo.png"
+          alt="ELCON"
+          class="company-logo"
+        />
+
+        <div class="brand-text">
+
+          
+
+          <h1>
+            PANEL ADMINISTRATIVO
+          </h1>
+
+          
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         CARGANDO
+    ========================== -->
+
+    <div
+      *ngIf="cargando"
+      class="mensaje">
+
+      <span class="loading-dot">
+        ●
+      </span>
+
+      Cargando información...
+
+    </div>
+
+
+    <!-- =========================
+         ERROR
+    ========================== -->
+
+    <div
+      *ngIf="mensajeError"
+      class="error">
+
+      {{ mensajeError }}
+
+    </div>
+
+
+    <!-- =========================
+         RESUMEN GENERAL
+    ========================== -->
+
+    <div class="section-heading">
+
+      <div>
+
+        <h2>
+          Resumen general
+        </h2>
+
+        <p>
+          Información actual del sistema
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         ESTADÍSTICAS
+    ========================== -->
+
+    <div class="stats-grid">
+
+
+      <!-- EMPLEADOS -->
+
+      <ion-card class="stat-card empleados">
+
+        <ion-card-content>
+
+          <div class="stat-icon">
+            👥
+          </div>
+
+          <div class="stat-info">
+
+            <span class="stat-number">
+              {{ totalEmpleados }}
+            </span>
+
+            <span class="stat-label">
+              Empleados
+            </span>
+
+            <span class="stat-description">
+              Personal registrado
+            </span>
+
+          </div>
+
+          <span class="stat-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- CLIENTES -->
+
+      <ion-card class="stat-card clientes">
+
+        <ion-card-content>
+
+          <div class="stat-icon">
+            👤
+          </div>
+
+          <div class="stat-info">
+
+            <span class="stat-number">
+              {{ totalClientes }}
+            </span>
+
+            <span class="stat-label">
+              Clientes
+            </span>
+
+            <span class="stat-description">
+              Clientes registrados
+            </span>
+
+          </div>
+
+          <span class="stat-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- EQUIPOS -->
+
+      <ion-card class="stat-card equipos">
+
+        <ion-card-content>
+
+          <div class="stat-icon">
+            💻
+          </div>
+
+          <div class="stat-info">
+
+            <span class="stat-number">
+              {{ totalEquipos }}
+            </span>
+
+            <span class="stat-label">
+              Equipos
+            </span>
+
+            <span class="stat-description">
+              Equipos registrados
+            </span>
+
+          </div>
+
+          <span class="stat-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- MANTENIMIENTOS -->
+
+      <ion-card class="stat-card mantenimientos">
+
+        <ion-card-content>
+
+          <div class="stat-icon">
+            🔧
+          </div>
+
+          <div class="stat-info">
+
+            <span class="stat-number">
+              {{ totalMantenimientos }}
+            </span>
+
+            <span class="stat-label">
+              Mantenimientos
+            </span>
+
+            <span class="stat-description">
+              Registros realizados
+            </span>
+
+          </div>
+
+          <span class="stat-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+
+    <!-- =========================
+         ESTADO DE MANTENIMIENTOS
+    ========================== -->
+
+    <div class="section-heading">
+
+      <div>
+
+        <h2>
+          Estado de mantenimientos
+        </h2>
+
+        <p>
+          Distribución de los trabajos registrados
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="status-grid">
+
+
+      <!-- PROGRAMADOS -->
+
+      <ion-card class="status-card programados">
+
+        <ion-card-content>
+
+          <div class="status-icon">
+            🗓️
+          </div>
+
+          <span class="status-number">
+            {{ mantenimientosProgramados }}
+          </span>
+
+          <span class="status-label">
+            Programados
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- EN PROCESO -->
+
+      <ion-card class="status-card proceso">
+
+        <ion-card-content>
+
+          <div class="status-icon">
+            🔄
+          </div>
+
+          <span class="status-number">
+            {{ mantenimientosEnProceso }}
+          </span>
+
+          <span class="status-label">
+            En proceso
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- COMPLETADOS -->
+
+      <ion-card class="status-card completados">
+
+        <ion-card-content>
+
+          <div class="status-icon">
+            ✓
+          </div>
+
+          <span class="status-number">
+            {{ mantenimientosCompletados }}
+          </span>
+
+          <span class="status-label">
+            Completados
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+
+    <!-- =========================
+         GESTIÓN DEL SISTEMA
+    ========================== -->
+
+    <div class="section-heading">
+
+      <div>
+
+        <h2>
+          Gestión del sistema
+        </h2>
+
+        <p>
+          Accede rápidamente a los módulos administrativos
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu-grid">
+
+
+      <!-- EMPLEADOS -->
+
+      <ion-card
+        class="menu-card empleados-menu"
+        (click)="irEmpleados()">
+
+        <ion-card-content>
+
+          <div class="menu-icon">
+            👥
+          </div>
+
+          <div class="menu-content">
+
+            <h3>
+              Empleados
+            </h3>
+
+            <p>
+              Gestionar empleados del sistema.
+            </p>
+
+          </div>
+
+          <span class="menu-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- CLIENTES -->
+
+      <ion-card
+        class="menu-card clientes-menu"
+        (click)="irClientes()">
+
+        <ion-card-content>
+
+          <div class="menu-icon">
+            👤
+          </div>
+
+          <div class="menu-content">
+
+            <h3>
+              Clientes
+            </h3>
+
+            <p>
+              Gestionar clientes registrados.
+            </p>
+
+          </div>
+
+          <span class="menu-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- EQUIPOS -->
+
+      <ion-card
+        class="menu-card equipos-menu"
+        (click)="irEquipos()">
+
+        <ion-card-content>
+
+          <div class="menu-icon">
+            💻
+          </div>
+
+          <div class="menu-content">
+
+            <h3>
+              Equipos
+            </h3>
+
+            <p>
+              Gestionar equipos registrados.
+            </p>
+
+          </div>
+
+          <span class="menu-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+
+      <!-- MANTENIMIENTOS -->
+
+      <ion-card
+        class="menu-card mantenimiento-menu"
+        (click)="irMantenimientos()">
+
+        <ion-card-content>
+
+          <div class="menu-icon">
+            🔧
+          </div>
+
+          <div class="menu-content">
+
+            <h3>
+              Mantenimientos
+            </h3>
+
+            <p>
+              Gestionar mantenimientos preventivos y correctivos.
+            </p>
+
+          </div>
+
+          <span class="menu-arrow">
+            →
+          </span>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+
+    <!-- =========================
+         CERRAR SESIÓN
+    ========================== -->
+
+    <ion-button
+      expand="block"
+      color="danger"
+      class="logout-button"
+      (click)="cerrarSesion()">
+
+      Cerrar sesión
+
+    </ion-button>
+
+
   </div>
-
-  <div class="menu-grid">
-
-    <ion-card (click)="irEmpleados()">
-      <ion-card-header>
-        <ion-card-title>👥 Empleados</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Gestionar empleados del sistema.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card (click)="irEquipos()">
-      <ion-card-header>
-        <ion-card-title>💻 Equipos</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Gestionar equipos registrados.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card (click)="irMantenimientos()">
-      <ion-card-header>
-        <ion-card-title>🔧 Mantenimientos</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Gestionar mantenimientos.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card (click)="irClientes()">
-      <ion-card-header>
-        <ion-card-title>👤 Clientes</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Consultar clientes registrados.
-      </ion-card-content>
-    </ion-card>
-
-  </div>
-
-  <ion-button expand="block" color="danger">
-    Cerrar sesión
-  </ion-button>
 
 </ion-content>

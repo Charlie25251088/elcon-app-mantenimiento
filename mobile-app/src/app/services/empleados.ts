@@ -46,5 +46,40 @@ export class EmpleadosService {
   return this.http.get<Empleado[]>(
     `${this.apiUrl}/tecnicos`
   );
+  }
+
+  /*obtenerClientes(): Observable<Empleado[]> {
+  return this.http.get<Empleado[]>(
+    'https://localhost:7088/api/Auth/clientes'
+  );
+  }*/
+
+  obtenerClientes(): Observable<Empleado[]> {
+  return this.http.get<Empleado[]>(
+    'https://localhost:7088/api/Clientes'
+  );
+}
+
+  crearCliente(cliente: Empleado & { password: string }): Observable<any> {
+  return this.http.post(
+    'https://localhost:7088/api/Clientes',
+    cliente
+  );
+}
+
+actualizarCliente(
+  id: number,
+  cliente: Empleado
+): Observable<void> {
+  return this.http.put<void>(
+    `https://localhost:7088/api/Clientes/${id}`,
+    cliente
+  );
+}
+
+eliminarCliente(id: number): Observable<void> {
+  return this.http.delete<void>(
+    `https://localhost:7088/api/Clientes/${id}`
+  );
 }
 }

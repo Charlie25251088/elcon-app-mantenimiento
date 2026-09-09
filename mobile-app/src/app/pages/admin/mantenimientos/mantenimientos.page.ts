@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 import {
   IonContent,
@@ -16,7 +16,9 @@ import {
   IonInput,
   IonTextarea,
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  IonButtons,
+  IonBackButton,
 } from '@ionic/angular';
 
 import {
@@ -55,7 +57,9 @@ import {
     IonInput,
     IonTextarea,
     IonSelect,
-    IonSelectOption
+    IonSelectOption,
+    IonButtons,
+    IonBackButton
   ]
 })
 export class MantenimientosPage {
@@ -88,7 +92,8 @@ export class MantenimientosPage {
   constructor(
     private mantenimientosService: MantenimientosService,
     private equiposService: EquiposService,
-    private empleadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -116,6 +121,8 @@ export class MantenimientosPage {
 
           this.mantenimientos = data;
           this.cargando = false;
+
+          this.cdr.detectChanges();
         },
 
         error: (error) => {
@@ -130,6 +137,8 @@ export class MantenimientosPage {
 
           this.mensajeError =
             'No se pudieron cargar los mantenimientos.';
+
+            this.cdr.detectChanges();
         }
       });
   }
@@ -236,6 +245,18 @@ export class MantenimientosPage {
 
     this.mensajeError = '';
     this.mostrarFormulario = true;
+
+    setTimeout(() => {
+  const formulario = document.querySelector('.form-card');
+
+  if (formulario) {
+    formulario.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}, 100);
+
   }
 
   cancelarFormulario(): void {

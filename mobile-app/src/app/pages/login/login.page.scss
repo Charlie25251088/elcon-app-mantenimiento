@@ -1,37 +1,419 @@
-.login-container {
-  max-width: 450px;
-  margin: 60px auto;
-  padding: 20px;
+/* =========================
+   FONDO GENERAL
+========================= */
+
+ion-content {
+  --background: #0756a8;
 }
+
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+
+.login-page {
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  background: #0756a8;
+}
+
+
+/* =========================
+   ENCABEZADO
+========================= */
 
 .login-header {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  background: linear-gradient(
+    135deg,
+    #0756a8,
+    #0b69c7
+  );
+
+  color: white;
+
   text-align: center;
-  margin-bottom: 35px;
 }
 
-.login-header h1 {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 10px;
+
+/* =========================
+   TÍTULO SUPERIOR
+========================= */
+
+.top-title {
+  width: 100%;
+
+  padding: 14px 20px;
+
+  text-align: left;
+
+  font-size: 20px;
+
+  font-weight: 500;
+
+  color: white;
+
+  background: rgba(0, 0, 0, 0.08);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.login-header p {
-  color: #666;
-  font-size: 16px;
+
+/* =========================
+   MARCA
+========================= */
+
+.brand {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  padding: 30px 20px 58px;
 }
 
-ion-item {
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  width: 500px;
+  height: auto;
+
+  display: block;
+
   margin-bottom: 18px;
-  --border-radius: 10px;
+
+  object-fit: contain;
+
+  filter: drop-shadow(
+    0 5px 10px rgba(0, 0, 0, 0.15)
+  );
 }
+
+
+/* =========================
+   NOMBRE
+========================= */
+
+.brand h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 27px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.3px;
+}
+
+
+/* =========================
+   DESCRIPCIÓN
+========================= */
+
+.brand p {
+  max-width: 340px;
+
+  margin: 8px 0 0;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.login-form {
+  width: calc(100% - 32px);
+
+  max-width: 430px;
+
+  margin: -30px auto 30px;
+
+  padding: 30px 22px 25px;
+
+  background: white;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.16);
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================
+   BIENVENIDA
+========================= */
+
+.welcome {
+  margin-bottom: 24px;
+}
+
+.welcome h2 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+.welcome p {
+  margin: 6px 0 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.input-item {
+  --background: #f8fafc;
+
+  --border-color: #dbe3ec;
+
+  --border-width: 1px;
+
+  --border-style: solid;
+
+  --border-radius: 11px;
+
+  --padding-start: 14px;
+
+  --inner-padding-end: 8px;
+
+  margin-bottom: 16px;
+
+  border-radius: 11px;
+
+  overflow: hidden;
+}
+
+.input-item ion-input {
+  --color: #1f2937;
+
+  --placeholder-color: #94a3b8;
+
+  --highlight-color-focused: #0756a8;
+}
+
+
+/* =========================
+   CONTRASEÑA
+========================= */
+
+.password-button {
+  --color: #0756a8;
+
+  margin: 0;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error {
+  margin: -2px 0 15px;
+
+  padding: 11px 12px;
+
+  border-radius: 9px;
+
+  background: #fee2e2;
+
+  border: 1px solid #fecaca;
+
+  color: #b91c1c;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================
+   BOTÓN INGRESAR
+========================= */
 
 .login-button {
-  margin-top: 25px;
-  height: 50px;
+  height: 52px;
+
+  margin-top: 7px;
+
+  --background: #0756a8;
+
+  --background-hover: #06498f;
+
+  --border-radius: 11px;
+
+  --box-shadow:
+    0 6px 16px rgba(7, 86, 168, 0.28);
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
 }
 
-.register-text {
+.login-button ion-spinner {
+  width: 22px;
+  height: 22px;
+}
+
+
+/* =========================
+   SEPARADOR
+========================= */
+
+.login-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+.login-info .line {
+  flex: 1;
+
+  height: 1px;
+
+  background: #e5e7eb;
+}
+
+.login-info span {
+  color: #9ca3af;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   TEXTO INFORMATIVO
+========================= */
+
+.security-text {
+  margin: 12px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
   text-align: center;
-  margin-top: 30px;
-  color: #666;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 500px) {
+
+  .top-title {
+    padding: 13px 20px;
+
+    font-size: 19px;
+  }
+
+  .brand {
+    padding: 27px 18px 55px;
+  }
+
+  .logo {
+    width: 200px;
+
+    margin-bottom: 17px;
+  }
+
+  .brand h1 {
+    font-size: 25px;
+  }
+
+  .brand p {
+    font-size: 11px;
+  }
+
+  .login-form {
+    width: calc(100% - 28px);
+
+    padding: 27px 18px 24px;
+  }
+
+}
+
+
+/* =========================
+   CELULAR PEQUEÑO
+========================= */
+
+@media (max-width: 380px) {
+
+  .top-title {
+    font-size: 18px;
+  }
+
+  .brand {
+    padding-top: 23px;
+
+    padding-bottom: 50px;
+  }
+
+  .logo {
+    width: 175px;
+  }
+
+  .brand h1 {
+    font-size: 22px;
+  }
+
+  .login-form {
+    padding: 24px 16px;
+  }
+
+  .welcome h2 {
+    font-size: 22px;
+  }
+
 }

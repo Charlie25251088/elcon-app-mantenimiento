@@ -1,56 +1,144 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Iniciar sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
 
-  <div class="login-container">
+  <div class="login-page">
 
-    <h1>Elcon Mantenimiento</h1>
+    <!-- =========================
+         ENCABEZADO
+    ========================== -->
 
-    <p>Ingresa a tu cuenta</p>
+    <div class="login-header">
 
-    <ion-item>
-      <ion-input
-        label="Correo electrónico"
-        labelPlacement="floating"
-        type="email"
-        [(ngModel)]="email">
-      </ion-input>
-    </ion-item>
+      <div class="top-title">
+        Iniciar sesión
+      </div>
 
-    <ion-item>
-      <ion-input
-        label="Contraseña"
-        labelPlacement="floating"
-        type="password"
-        [(ngModel)]="password">
-      </ion-input>
-    </ion-item>
+      <div class="brand">
 
-    <ion-button
-      expand="block"
-      (click)="iniciarSesion()"
-      [disabled]="cargando">
+        <!-- LOGO ELCON -->
+        <img
+          src="assets/icon/logo.png"
+          alt="ELCON"
+          class="logo"
+        />
 
-      <ion-spinner
-        *ngIf="cargando"
-        name="crescent">
-      </ion-spinner>
+        <h1>
+          Gestión de mantenimiento de sistemas de seguridad electrónica
+        </h1>
 
-      <span *ngIf="!cargando">
-        INICIAR SESIÓN
-      </span>
+        
 
-    </ion-button>
+      </div>
 
-    <ion-text color="danger" *ngIf="error">
-      <p class="error">
+    </div>
+
+
+    <!-- =========================
+         FORMULARIO
+    ========================== -->
+
+    <div class="login-form">
+
+      <div class="welcome">
+
+        <h2>
+          Bienvenido
+        </h2>
+
+        <p>
+          Ingresa a tu cuenta para continuar
+        </p>
+
+      </div>
+
+
+      <!-- CORREO -->
+
+      <ion-item class="input-item">
+
+        <ion-input
+          label="Correo electrónico"
+          labelPlacement="floating"
+          type="email"
+          [(ngModel)]="email">
+        </ion-input>
+
+      </ion-item>
+
+
+      <!-- CONTRASEÑA -->
+
+      <ion-item class="input-item password-item">
+
+        <ion-input
+          label="Contraseña"
+          labelPlacement="floating"
+          type="password"
+          [(ngModel)]="password">
+        </ion-input>
+
+        <ion-button
+          slot="end"
+          fill="clear"
+          class="password-button">
+
+          VER
+
+        </ion-button>
+
+      </ion-item>
+
+
+      <!-- ERROR -->
+
+      <div
+        *ngIf="error"
+        class="error">
+
         {{ error }}
+
+      </div>
+
+
+      <!-- INGRESAR -->
+
+      <ion-button
+        expand="block"
+        class="login-button"
+        (click)="iniciarSesion()"
+        [disabled]="cargando">
+
+        <ion-spinner
+          *ngIf="cargando"
+          name="crescent">
+        </ion-spinner>
+
+        <span *ngIf="!cargando">
+          INGRESAR
+        </span>
+
+      </ion-button>
+
+
+      <!-- SEPARADOR -->
+
+      <div class="login-info">
+
+        <div class="line"></div>
+
+        <span>
+          Acceso seguro
+        </span>
+
+        <div class="line"></div>
+
+      </div>
+
+
+      <p class="security-text">
+        Inicia sesión con tus credenciales para acceder al sistema.
       </p>
-    </ion-text>
+
+    </div>
 
   </div>
 

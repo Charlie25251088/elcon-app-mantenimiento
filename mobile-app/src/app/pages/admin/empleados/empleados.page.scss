@@ -1,92 +1,441 @@
+/* =========================
+   FONDO
+========================= */
+
+ion-content {
+  --background: #0756a8;
+}
+
+ion-content::part(scroll) {
+  background: linear-gradient(
+    180deg,
+    #0756a8 0%,
+    #0863b8 45%,
+    #0b69c7 100%
+  );
+}
+
+
+/* =========================
+   ENCABEZADO
+========================= */
+
 .header-section {
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
-  margin-bottom: 25px;
 
-  h1 {
-    margin-bottom: 5px;
-  }
+  gap: 15px;
 
-  p {
-    color: #666;
-    margin-top: 0;
-  }
+  margin-bottom: 24px;
+
+  color: white;
 }
+
+.header-section h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 26px;
+
+  font-weight: 700;
+}
+
+.header-section p {
+  margin: 5px 0 0;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   BOTÓN NUEVO
+========================= */
+
+.header-section ion-button {
+  --background: floralwhite;
+
+  --color: #0756a8;
+
+  --border-radius: 10px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   TARJETAS
+========================= */
 
 ion-card {
-  margin-bottom: 12px;
+  margin: 0 0 14px;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.09);
 }
 
-ion-card h2 {
-  margin-top: 0;
+ion-card-content {
+  padding: 17px;
 }
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-card {
+  margin-bottom: 22px;
+}
+
+.form-card h2 {
+  margin: 0 0 18px;
+
+  color: #1e293b;
+
+  font-size: 21px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
 
 ion-item {
-  margin-bottom: 8px;
+  --background: #ffffff;
+
+  --border-color: #dbe3ec;
+
+  --border-width: 1px;
+
+  --border-style: solid;
+
+  --border-radius: 10px;
+
+  --padding-start: 13px;
+
+  --inner-padding-end: 8px;
+
+  margin-bottom: 10px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
 }
 
+ion-label {
+  color: #334155 !important;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+ion-input {
+  --color: #1e293b;
+
+  --placeholder-color: #94a3b8;
+}
+
+
+/* =========================
+   TOGGLE
+========================= */
+
+ion-item ion-toggle {
+  margin-right: 5px;
+}
+
+
+/* =========================
+   BOTONES FORMULARIO
+========================= */
+
 .form-buttons {
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
   gap: 10px;
+
   margin-top: 20px;
 }
 
-.error-message {
-  color: #d32f2f;
-  margin-top: 15px;
-  padding: 10px;
-  background: #ffebee;
-  border-radius: 5px;
+.form-buttons ion-button {
+  --border-radius: 10px;
+
+  font-weight: 700;
 }
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+  margin: 14px 0;
+
+  padding: 11px 13px;
+
+  border-radius: 9px;
+
+  background: #fee2e2;
+
+  border: 1px solid #fecaca;
+
+  color: #991b1b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   INFORMACIÓN EMPLEADO
+========================= */
 
 .empleado-info {
   display: flex;
+
   justify-content: space-between;
-  align-items: center;
-  gap: 20px;
 
-  h2 {
-    margin-top: 0;
-    margin-bottom: 12px;
-  }
+  align-items: flex-start;
 
-  p {
-    margin: 6px 0;
-  }
+  gap: 15px;
 }
+
+.empleado-info h2 {
+  margin: 0 0 12px;
+
+  color: #1e293b;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+.empleado-info p {
+  margin: 6px 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  line-height: 1.35;
+}
+
+.empleado-info p strong {
+  color: #334155;
+}
+
+
+/* =========================
+   ACCIONES
+========================= */
 
 .acciones {
   display: flex;
-  gap: 8px;
+
+  gap: 9px;
+
+  flex-shrink: 0;
 }
 
-.loading,
-.empty {
+.acciones ion-button {
+  --border-radius: 9px;
+
+  margin: 0;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   BOTÓN EDITAR
+========================= */
+
+.acciones ion-button:first-child {
+  --color: #0756a8;
+
+  --border-color: #0756a8;
+}
+
+
+/* =========================
+   BOTÓN ELIMINAR
+========================= */
+
+.acciones ion-button:last-child {
+  --border-color: #dc2626;
+}
+
+
+/* =========================
+   CARGANDO
+========================= */
+
+.loading {
+  padding: 40px 20px;
+
   text-align: center;
-  margin: 50px 0;
+
+  color: white;
 }
 
-@media (max-width: 700px) {
+.loading p {
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   SIN EMPLEADOS
+========================= */
+
+.empty {
+  margin: 25px 0;
+
+  padding: 40px 20px;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  text-align: center;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.empty h2 {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 18px;
+}
+
+.empty p {
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   BOTÓN VOLVER
+========================= */
+
+ion-content > ion-button:last-child {
+  margin-top: 22px;
+
+  margin-bottom: 5px;
+
+  --color: white;
+
+  --border-color: rgba(255, 255, 255, 0.75);
+
+  --border-radius: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   TABLET / PC
+========================= */
+
+@media (min-width: 700px) {
+
+  ion-content {
+    --padding-start: 25px;
+    --padding-end: 25px;
+  }
+
+  .header-section {
+    max-width: 1000px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+  ion-card {
+    max-width: 1000px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
 
   .header-section {
     flex-direction: column;
+
     align-items: stretch;
-    gap: 10px;
+  }
+
+  .header-section ion-button {
+    width: 100%;
   }
 
   .empleado-info {
     flex-direction: column;
-    align-items: stretch;
   }
 
   .acciones {
-    flex-direction: column;
+    width: 100%;
+  }
+
+  .acciones ion-button {
+    flex: 1;
   }
 
   .form-buttons {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================
+   CELULAR PEQUEÑO
+========================= */
+
+@media (max-width: 380px) {
+
+  .empleado-info h2 {
+    font-size: 16px;
+  }
+
+  ion-card-content {
+    padding: 15px;
   }
 
 }

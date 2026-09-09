@@ -44,6 +44,8 @@ export class LoginPage {
   cargando = false;
   error = '';
 
+  mostrarPassword = false;
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -54,54 +56,79 @@ export class LoginPage {
     this.error = '';
 
     if (!this.email || !this.password) {
-      this.error = 'Ingrese el correo y la contraseña.';
+      this.error =
+        'Ingrese el correo y la contraseña.';
       return;
     }
 
     this.cargando = true;
 
-    this.authService.login(
-      this.email,
-      this.password
-    ).subscribe({
+    this.authService
+      .login(this.email, this.password)
+      .subscribe({
 
-      next: (respuesta) => {
+        next: (respuesta) => {
 
-        console.log('Login exitoso:', respuesta);
+          console.log(
+            'Login exitoso:',
+            respuesta
+          );
 
-        this.authService.guardarSesion(respuesta);
+          this.authService
+            .guardarSesion(respuesta);
 
-        this.cargando = false;
+          this.cargando = false;
 
-        //this.router.navigate(['/home']);
+          const rol = respuesta.roles[0];
 
-        const rol = respuesta.roles[0];
+          if (rol === 'Administrador') {
 
-if (rol === 'Administrador') {
-  this.router.navigate(['/admin']);
-} else if (rol === 'Tecnico') {
-  this.router.navigate(['/tecnico']);
-} else if (rol === 'Cliente') {
-  this.router.navigate(['/cliente']);
-} else {
-  this.router.navigate(['/home']);
-}
+            this.router.navigate(['/admin']);
 
-      },
+          } else if (rol === 'Tecnico') {
 
-      error: (error) => {
+            this.router.navigate(['/tecnico']);
 
-        console.error('Error de login:', error);
+          } else if (rol === 'Cliente') {
 
-        this.cargando = false;
+            this.router.navigate(['/cliente']);
 
-        if (error.status === 401) {
-          this.error = 'Correo o contraseña incorrectos.';
-        } else {
-          this.error = 'No se pudo conectar con el servidor.';
+          } else {
+
+            this.router.navigate(['/home']);
+
+          }
+
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Error de login:',
+            error
+          );
+
+          this.cargando = false;
+
+          if (error.status === 401) {
+
+            this.error =
+              'Correo o contraseña incorrectos.';
+
+          } else {
+
+            this.error =
+              'No se pudo conectar con el servidor.';
+
+          }
+
         }
-      }
 
-    });
+      });
+  }
+
+  cambiarVisibilidadPassword(): void {
+    this.mostrarPassword =
+      !this.mostrarPassword;
   }
 }

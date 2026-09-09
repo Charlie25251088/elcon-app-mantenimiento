@@ -1,28 +1,60 @@
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mantenimientos</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/admin"
+        text="">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Mantenimientos
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <h1>Mantenimientos</h1>
+  <!-- ENCABEZADO -->
 
-  <p>
-    Gestiona los mantenimientos registrados en el sistema.
-  </p>
+  
 
-  <ion-button
-    expand="block"
-    (click)="abrirFormulario()">
+    <div class="page-header">
 
-    + NUEVO MANTENIMIENTO
+      <div>
 
-  </ion-button>
+        
+        <h1>
+          Mantenimientos
+        </h1>
+
+        <p>
+          Gestiona los mantenimientos preventivos y correctivos.
+        </p>
+
+      </div>
+
+    
+    <ion-button 
+  expand="block"
+  class="nuevo-button"
+  (click)="abrirFormulario()">
+
+  + NUEVO MANTENIMIENTO
+
+</ion-button>
+
+  </div>
+
 
   <!-- FORMULARIO -->
 
-  <ion-card *ngIf="mostrarFormulario">
+  <ion-card
+    *ngIf="mostrarFormulario"
+    class="form-card">
 
     <ion-card-content>
 
@@ -34,31 +66,31 @@
         }}
       </h2>
 
-      <!-- EQUIPO -->
 
       <!-- EQUIPO -->
 
-<ion-item>
+      <ion-item>
 
-  <ion-label position="stacked">
-    Equipo *
-  </ion-label>
+        <ion-label position="stacked">
+          Equipo *
+        </ion-label>
 
-  <ion-select
-    [(ngModel)]="nuevoMantenimiento.equipoId"
-    placeholder="Seleccione un equipo">
+        <ion-select
+          [(ngModel)]="nuevoMantenimiento.equipoId"
+          placeholder="Seleccione un equipo">
 
-    <ion-select-option
-      *ngFor="let equipo of equipos"
-      [value]="equipo.id">
+          <ion-select-option
+            *ngFor="let equipo of equipos"
+            [value]="equipo.id">
 
-      {{ equipo.codigo }} - {{ equipo.nombre }}
+            {{ equipo.codigo }} - {{ equipo.nombre }}
 
-    </ion-select-option>
+          </ion-select-option>
 
-  </ion-select>
+        </ion-select>
 
-</ion-item>
+      </ion-item>
+
 
       <!-- FECHA -->
 
@@ -74,6 +106,7 @@
         </ion-input>
 
       </ion-item>
+
 
       <!-- TIPO -->
 
@@ -98,7 +131,8 @@
 
       </ion-item>
 
-      <!-- DESCRIPCION -->
+
+      <!-- DESCRIPCIÓN -->
 
       <ion-item>
 
@@ -112,6 +146,7 @@
         </ion-textarea>
 
       </ion-item>
+
 
       <!-- ESTADO -->
 
@@ -144,6 +179,7 @@
 
       </ion-item>
 
+
       <!-- OBSERVACIONES -->
 
       <ion-item>
@@ -159,76 +195,79 @@
 
       </ion-item>
 
-      <!-- TECNICO -->
 
-     <!-- TECNICO -->
+      <!-- TÉCNICO -->
 
-<ion-item>
+      <ion-item>
 
-  <ion-label position="stacked">
-    Técnico
-  </ion-label>
+        <ion-label position="stacked">
+          Técnico
+        </ion-label>
 
-  <ion-select
-    [(ngModel)]="nuevoMantenimiento.tecnicoId"
-    placeholder="Seleccione un técnico">
+        <ion-select
+          [(ngModel)]="nuevoMantenimiento.tecnicoId"
+          placeholder="Seleccione un técnico">
 
-    <ion-select-option
-      *ngFor="let tecnico of tecnicos"
-      [value]="tecnico.id">
+          <ion-select-option
+            *ngFor="let tecnico of tecnicos"
+            [value]="tecnico.id">
 
-      {{ tecnico.nombre }} {{ tecnico.apellido }}
+            {{ tecnico.nombre }} {{ tecnico.apellido }}
 
-    </ion-select-option>
+          </ion-select-option>
 
-  </ion-select>
+        </ion-select>
 
-</ion-item>
+      </ion-item>
+
 
       <!-- ERROR -->
 
-      <p
+      <div
         *ngIf="mensajeError"
         class="error-message">
 
         {{ mensajeError }}
 
-      </p>
+      </div>
 
-      <!-- GUARDAR -->
 
-      <ion-button
-        expand="block"
-        (click)="guardarMantenimiento()"
-        [disabled]="guardando">
+      <!-- BOTONES -->
 
-        {{
-          guardando
-            ? 'GUARDANDO...'
-            : (
-                editando
-                  ? 'ACTUALIZAR MANTENIMIENTO'
-                  : 'GUARDAR MANTENIMIENTO'
-              )
-        }}
+      <div class="form-buttons">
 
-      </ion-button>
+        <ion-button
+          fill="outline"
+          color="medium"
+          (click)="cancelarFormulario()"
+          [disabled]="guardando">
 
-      <!-- CANCELAR -->
+          Cancelar
 
-      <ion-button
-        expand="block"
-        fill="outline"
-        (click)="cancelarFormulario()"
-        [disabled]="guardando">
+        </ion-button>
 
-        CANCELAR
+        <ion-button
+          (click)="guardarMantenimiento()"
+          [disabled]="guardando">
 
-      </ion-button>
+          {{
+            guardando
+              ? 'Guardando...'
+              : (
+                  editando
+                    ? 'Actualizar'
+                    : 'Guardar'
+                )
+          }}
+
+        </ion-button>
+
+      </div>
 
     </ion-card-content>
 
   </ion-card>
+
 
   <!-- CARGANDO -->
 
@@ -236,99 +275,205 @@
     *ngIf="cargando"
     class="loading">
 
-    <p>
-      Cargando mantenimientos...
-    </p>
+    <p>Cargando mantenimientos...</p>
 
   </div>
+
 
   <!-- LISTA -->
 
   <div
-    *ngIf="
-      !cargando &&
-      mantenimientos.length > 0
-    ">
+    *ngIf="!cargando && mantenimientos.length > 0"
+    class="maintenance-list">
 
     <ion-card
-      *ngFor="
-        let mantenimiento of mantenimientos
-      ">
+      *ngFor="let mantenimiento of mantenimientos"
+      class="maintenance-card">
 
       <ion-card-content>
 
-        <h2>
-          Mantenimiento #{{ mantenimiento.id }}
-        </h2>
+        <!-- CABECERA -->
 
-        <p>
-          <strong>Equipo ID:</strong>
-          {{ mantenimiento.equipoId }}
-        </p>
+        <div class="maintenance-header">
 
-        <p>
-          <strong>Fecha:</strong>
-          {{ mantenimiento.fecha | date:'dd/MM/yyyy HH:mm' }}
-        </p>
+          <div>
 
-        <p>
-          <strong>Tipo:</strong>
-          {{ mantenimiento.tipo }}
-        </p>
+            <span class="maintenance-number">
+              Mantenimiento #{{ mantenimiento.id }}
+            </span>
 
-        <p>
-          <strong>Descripción:</strong>
-          {{ mantenimiento.descripcion }}
-        </p>
+            <h2>
+              {{
+                mantenimiento.equipo?.nombre
+                  || 'Equipo no especificado'
+              }}
+            </h2>
 
-        <p>
-          <strong>Estado:</strong>
-          {{ mantenimiento.estado }}
-        </p>
+          </div>
 
-        <p *ngIf="mantenimiento.observaciones">
+          <span
+            class="status-badge"
+            [ngClass]="{
+              'programado':
+                mantenimiento.estado === 'Programado',
 
-          <strong>Observaciones:</strong>
-          {{ mantenimiento.observaciones }}
+              'proceso':
+                mantenimiento.estado === 'En proceso',
 
-        </p>
+              'completado':
+                mantenimiento.estado === 'Completado',
 
-        <p>
-          <strong>Técnico ID:</strong>
-          {{
-            mantenimiento.tecnicoId ||
-            'Sin asignar'
-          }}
-        </p>
+              'cancelado':
+                mantenimiento.estado === 'Cancelado'
+            }">
 
-        <!-- EDITAR -->
+            {{ mantenimiento.estado }}
 
-        <ion-button
-          expand="block"
-          fill="outline"
-          (click)="editarMantenimiento(mantenimiento)">
+          </span>
 
-          EDITAR
+        </div>
 
-        </ion-button>
 
-        <!-- ELIMINAR -->
+        <!-- INFORMACIÓN -->
 
-        <ion-button
-          expand="block"
-          color="danger"
-          fill="outline"
-          (click)="eliminarMantenimiento(mantenimiento.id!)">
+        <div class="maintenance-info">
 
-          ELIMINAR
+          <div class="info-item">
 
-        </ion-button>
+            <span class="info-label">
+              Equipo
+            </span>
+
+            <span class="info-value">
+
+              {{
+                mantenimiento.equipo?.codigo
+                  || ('ID: ' + mantenimiento.equipoId)
+              }}
+
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-label">
+              Fecha
+            </span>
+
+            <span class="info-value">
+
+              {{
+                mantenimiento.fecha
+                  | date:'dd/MM/yyyy HH:mm'
+              }}
+
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-label">
+              Tipo
+            </span>
+
+            <span class="type-badge">
+
+              {{ mantenimiento.tipo }}
+
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-label">
+              Técnico
+            </span>
+
+            <span class="info-value">
+
+              {{
+                mantenimiento.tecnico
+                  ? (mantenimiento.tecnico.nombre + ' ' +
+                     mantenimiento.tecnico.apellido)
+                  : 'Sin asignar'
+              }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- DESCRIPCIÓN -->
+
+        <div class="description-section">
+
+          <span class="info-label">
+            Descripción
+          </span>
+
+          <p>
+            {{ mantenimiento.descripcion }}
+          </p>
+
+        </div>
+
+
+        <!-- OBSERVACIONES -->
+
+        <div
+          *ngIf="mantenimiento.observaciones"
+          class="description-section">
+
+          <span class="info-label">
+            Observaciones
+          </span>
+
+          <p>
+            {{ mantenimiento.observaciones }}
+          </p>
+
+        </div>
+
+
+        <!-- ACCIONES -->
+
+        <div class="actions">
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            (click)="editarMantenimiento(mantenimiento)">
+
+            EDITAR
+
+          </ion-button>
+
+          <ion-button
+            expand="block"
+            color="danger"
+            fill="outline"
+            (click)="eliminarMantenimiento(mantenimiento.id!)">
+
+            ELIMINAR
+
+          </ion-button>
+
+        </div>
 
       </ion-card-content>
 
     </ion-card>
 
   </div>
+
 
   <!-- SIN MANTENIMIENTOS -->
 
@@ -340,38 +485,35 @@
     "
     class="empty">
 
-    <h2>
-      No hay mantenimientos registrados
-    </h2>
+    <h2>No hay mantenimientos registrados</h2>
 
     <p>
-      Actualmente no existen mantenimientos
-      en el sistema.
+      Actualmente no existen mantenimientos en el sistema.
     </p>
 
   </div>
 
+
   <!-- ERROR -->
 
   <div
-    *ngIf="
-      mensajeError &&
-      !mostrarFormulario
-    "
+    *ngIf="mensajeError && !mostrarFormulario"
     class="error-message">
 
     {{ mensajeError }}
 
   </div>
 
+
   <!-- VOLVER -->
 
   <ion-button
     expand="block"
     fill="outline"
-    routerLink="/admin">
+    routerLink="/admin"
+    class="back-button">
 
-    ← VOLVER AL PANEL
+    ← Volver al panel
 
   </ion-button>
 

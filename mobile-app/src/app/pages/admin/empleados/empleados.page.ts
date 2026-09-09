@@ -1,8 +1,7 @@
-//import { Component, OnInit } from '@angular/core';
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 import {
   IonContent,
@@ -15,7 +14,9 @@ import {
   IonItem,
   IonLabel,
   IonInput,
-  IonToggle
+  IonToggle,
+  IonButtons,
+  IonBackButton,
 } from '@ionic/angular';
 
 import {
@@ -42,10 +43,12 @@ import {
     IonItem,
     IonLabel,
     IonInput,
-    IonToggle
+    IonToggle,
+    IonButtons,
+    IonBackButton,
   ]
 })
-//export class EmpleadosPage implements OnInit {
+
 export class EmpleadosPage {
 
   empleados: Empleado[] = [];
@@ -69,19 +72,14 @@ export class EmpleadosPage {
     activo: true
   };
 
-  
-
-
   constructor(
-    private empleadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  /*ngOnInit(): void {
-    this.cargarEmpleados();
-  }*/
 
-  ionViewWillEnter(): void {
-  this.cargarEmpleados();
+   ngOnInit(): void {
+    this.cargarEmpleados();
   }
 
   cargarEmpleados(): void {
@@ -89,7 +87,9 @@ export class EmpleadosPage {
     this.cargando = true;
     this.mensajeError = '';
 
-    this.empleadosService.obtenerEmpleados().subscribe({
+    this.empleadosService
+    .obtenerEmpleados()
+    .subscribe({
 
       next: (data: Empleado[]) => {
 
@@ -97,6 +97,9 @@ export class EmpleadosPage {
 
         this.empleados = data;
         this.cargando = false;
+
+        this.cdr.detectChanges();
+
 
       },
 
@@ -109,6 +112,8 @@ export class EmpleadosPage {
 
         this.mensajeError =
           'No se pudieron cargar los empleados.';
+
+          this.cdr.detectChanges();
 
       }
 
@@ -153,6 +158,21 @@ export class EmpleadosPage {
 
   this.mensajeError = '';
   this.mostrarFormulario = true;
+
+
+  this.mensajeError = '';
+this.mostrarFormulario = true;
+
+setTimeout(() => {
+  const formulario = document.querySelector('.form-card');
+
+  if (formulario) {
+    formulario.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}, 100);
 }
 
   cancelarFormulario(): void {

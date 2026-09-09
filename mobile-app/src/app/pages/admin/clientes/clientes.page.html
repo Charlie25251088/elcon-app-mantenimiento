@@ -1,13 +1,449 @@
-<ion-header [translucent]="true">
+
+<ion-header>
   <ion-toolbar>
-    <ion-title>clientes</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/admin"
+        text="">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Clientes
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">clientes</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content>
+
+  <div class="clientes-page">
+
+
+    <!-- =========================
+         ENCABEZADO
+    ========================== -->
+
+    <div class="page-header">
+
+      <div>
+
+        
+        <h1>
+          Clientes
+        </h1>
+
+        <p>
+          Gestión de clientes de ELCON
+        </p>
+
+      </div>
+
+      <ion-button
+        *ngIf="!modoFormulario"
+        class="new-button"
+        (click)="nuevo()">
+
+        + Nuevo cliente
+
+      </ion-button>
+
+    </div>
+
+
+    <!-- =========================
+         FORMULARIO
+    ========================== -->
+
+    <ion-card
+      *ngIf="modoFormulario"
+      class="form-card">
+
+      <ion-card-content>
+
+        <div class="form-header">
+
+          <div>
+
+            <span class="form-label">
+              {{ modoEdicion ? 'ACTUALIZACIÓN' : 'REGISTRO' }}
+            </span>
+
+            <h2>
+              {{ modoEdicion
+                ? 'Editar cliente'
+                : 'Nuevo cliente'
+              }}
+            </h2>
+
+            <p>
+              {{ modoEdicion
+                ? 'Actualiza la información del cliente.'
+                : 'Ingresa los datos del nuevo cliente.'
+              }}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- NOMBRE -->
+
+        <ion-item class="input-item">
+
+          <ion-label position="stacked">
+            Nombre
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="nuevoCliente.nombre"
+            type="text"
+            placeholder="Ingrese el nombre">
+          </ion-input>
+
+        </ion-item>
+
+
+        <!-- APELLIDO -->
+
+        <ion-item class="input-item">
+
+          <ion-label position="stacked">
+            Apellido
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="nuevoCliente.apellido"
+            type="text"
+            placeholder="Ingrese el apellido">
+          </ion-input>
+
+        </ion-item>
+
+
+        <!-- CÉDULA -->
+
+        <ion-item class="input-item">
+
+          <ion-label position="stacked">
+            Cédula
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="nuevoCliente.cedula"
+            type="text"
+            placeholder="Ingrese la cédula">
+          </ion-input>
+
+        </ion-item>
+
+
+        <!-- TELÉFONO -->
+
+        <ion-item class="input-item">
+
+          <ion-label position="stacked">
+            Teléfono
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="nuevoCliente.telefono"
+            type="text"
+            placeholder="Ingrese el teléfono">
+          </ion-input>
+
+        </ion-item>
+
+
+        <!-- CORREO -->
+
+        <ion-item class="input-item">
+
+          <ion-label position="stacked">
+            Correo electrónico
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="nuevoCliente.email"
+            type="email"
+            placeholder="Ingrese el correo">
+          </ion-input>
+
+        </ion-item>
+
+
+        <!-- CONTRASEÑA -->
+
+        <ion-item
+          *ngIf="!modoEdicion"
+          class="input-item">
+
+          <ion-label position="stacked">
+            Contraseña
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="nuevoCliente.password"
+            type="password"
+            placeholder="Ingrese una contraseña">
+          </ion-input>
+
+        </ion-item>
+
+
+        <!-- ESTADO -->
+
+        <ion-item class="active-item">
+
+          <ion-label>
+            <strong>Cliente activo</strong>
+
+            <span>
+              Permitir acceso al sistema
+            </span>
+          </ion-label>
+
+          <ion-toggle
+            [(ngModel)]="nuevoCliente.activo">
+          </ion-toggle>
+
+        </ion-item>
+
+
+        <!-- ERROR -->
+
+        <div
+          *ngIf="mensajeError"
+          class="error">
+
+          {{ mensajeError }}
+
+        </div>
+
+
+        <!-- BOTONES -->
+
+        <div class="acciones-formulario">
+
+          <ion-button
+            expand="block"
+            class="save-button"
+            (click)="guardar()"
+            [disabled]="guardando">
+
+            {{ guardando
+              ? 'Guardando...'
+              : (modoEdicion
+                  ? 'Actualizar cliente'
+                  : 'Guardar cliente')
+            }}
+
+          </ion-button>
+
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="medium"
+            class="cancel-button"
+            (click)="cancelar()"
+            [disabled]="guardando">
+
+            Cancelar
+
+          </ion-button>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <!-- =========================
+         CARGANDO
+    ========================== -->
+
+    <div
+      *ngIf="cargando"
+      class="loading">
+
+      <div class="loading-icon">
+        ⏳
+      </div>
+
+      <p>
+        Cargando clientes...
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         ERROR GENERAL
+    ========================== -->
+
+    <div
+      *ngIf="mensajeError && !modoFormulario"
+      class="error">
+
+      {{ mensajeError }}
+
+    </div>
+
+
+    <!-- =========================
+         SIN CLIENTES
+    ========================== -->
+
+    <div
+      *ngIf="
+        !cargando &&
+        clientes.length === 0 &&
+        !mensajeError
+      "
+      class="empty">
+
+      <div class="empty-icon">
+        👤
+      </div>
+
+      <h2>
+        No hay clientes registrados
+      </h2>
+
+      <p>
+        Actualmente no existen clientes en el sistema.
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         LISTA DE CLIENTES
+    ========================== -->
+
+    <div
+      *ngIf="!cargando && clientes.length > 0"
+      class="clientes-list">
+
+      <ion-card
+        *ngFor="let cliente of clientes"
+        class="cliente-card">
+
+        <ion-card-content>
+
+          <div class="cliente-main">
+
+
+            <!-- ICONO -->
+
+            <div class="cliente-icon">
+              👤
+            </div>
+
+
+            <!-- INFORMACIÓN -->
+
+            <div class="cliente-info">
+
+              <div class="cliente-title">
+
+                <h2>
+                  {{ cliente.nombre }}
+                  {{ cliente.apellido }}
+                </h2>
+
+                <span
+                  class="estado"
+                  [class.activo]="cliente.activo"
+                  [class.inactivo]="!cliente.activo">
+
+                  {{ cliente.activo
+                    ? 'Activo'
+                    : 'Inactivo'
+                  }}
+
+                </span>
+
+              </div>
+
+
+              <div class="datos-cliente">
+
+                <p>
+                  <strong>Cédula</strong>
+                  {{ cliente.cedula }}
+                </p>
+
+                <p>
+                  <strong>Teléfono</strong>
+                  {{ cliente.telefono }}
+                </p>
+
+                <p>
+                  <strong>Correo</strong>
+                  {{ cliente.email }}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ACCIONES -->
+
+          <div class="acciones">
+
+            <ion-button
+              fill="outline"
+              class="edit-button"
+              (click)="editar(cliente)">
+
+              Editar
+
+            </ion-button>
+
+
+            <ion-button
+              fill="outline"
+              color="danger"
+              class="delete-button"
+              (click)="eliminar(cliente)">
+
+              Eliminar
+
+            </ion-button>
+
+          </div>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+
+    <!-- =========================
+         VOLVER
+    ========================== -->
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      class="back-button"
+      routerLink="/admin">
+
+      ← Volver al panel
+
+    </ion-button>
+
+
+  </div>
+
 </ion-content>

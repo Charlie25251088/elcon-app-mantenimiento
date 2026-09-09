@@ -1,45 +1,415 @@
-h1 {
-  margin-bottom: 5px;
+/* =========================
+   FONDO
+========================= */
+
+ion-content {
+  --background: #0756a8;
 }
 
-p {
-  color: #666;
+ion-content::part(scroll) {
+  background: linear-gradient(
+    180deg,
+    #0756a8 0%,
+    #0863b8 45%,
+    #0b69c7 100%
+  );
 }
+
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+ion-content > h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 26px;
+
+  font-weight: 700;
+}
+
+ion-content > p {
+  margin: 5px 0 20px;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   BOTÓN NUEVO EQUIPO
+========================= */
+
+ion-content > ion-button:first-of-type {
+  --background: floralwhite;
+  --color: #0756a8;
+  --border-radius: 10px;
+
+  width: 100%;
+
+  margin: 0 0 24px;
+
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   TARJETAS
+========================= */
 
 ion-card {
-  margin-top: 20px;
+  margin: 0 0 14px;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.09);
 }
 
-ion-card h2 {
-  margin-top: 0;
-  margin-bottom: 15px;
+ion-card-content {
+  padding: 17px;
 }
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-card h2 {
+  margin: 0 0 18px;
+
+  color: #1e293b;
+
+  font-size: 21px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
 
 ion-item {
+  --background: #ffffff;
+
+  --border-color: #dbe3ec;
+
+  --border-width: 1px;
+
+  --border-style: solid;
+
+  --border-radius: 10px;
+
+  --padding-start: 13px;
+
+  --inner-padding-end: 8px;
+
   margin-bottom: 10px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
 }
 
-ion-button {
-  margin-top: 12px;
+ion-label {
+  color: #334155 !important;
+
+  font-size: 12px;
+
+  font-weight: 600;
 }
+
+ion-input,
+ion-textarea {
+  --color: #1e293b;
+
+  --placeholder-color: #94a3b8;
+}
+
+
+/* =========================
+   BOTONES FORMULARIO
+========================= */
+
+.form-card ion-button {
+  --border-radius: 10px;
+
+  margin-top: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+  margin: 14px 0;
+
+  padding: 11px 13px;
+
+  border-radius: 9px;
+
+  background: #fee2e2;
+
+  border: 1px solid #fecaca;
+
+  color: #991b1b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   INFORMACIÓN EQUIPO
+========================= */
+
+ion-card:not(.form-card) h2 {
+  margin: 0 0 14px;
+
+  color: #1e293b;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+ion-card:not(.form-card) p {
+  margin: 7px 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+ion-card:not(.form-card) p strong {
+  color: #334155;
+}
+
+
+/* =========================
+   ESTADO
+========================= */
+
+ion-card:not(.form-card) p:last-of-type {
+  margin-top: 10px;
+}
+
+
+/* =========================
+   BOTONES ACCIONES
+========================= */
+
+ion-card:not(.form-card) ion-button {
+  --border-radius: 9px;
+
+  margin-top: 10px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+ion-card:not(.form-card) ion-button:first-of-type {
+  --color: #0756a8;
+
+  --border-color: #0756a8;
+}
+
+
+/* =========================
+   CARGANDO
+========================= */
 
 .loading {
+  padding: 40px 20px;
+
   text-align: center;
-  margin: 40px 0;
+
+  color: white;
 }
 
+.loading p {
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   SIN EQUIPOS
+========================= */
+
 .empty {
+  margin: 25px 0;
+
+  padding: 40px 20px;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
   text-align: center;
-  margin: 50px 20px;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .empty h2 {
-  color: #333;
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 18px;
 }
 
-.error-message {
-  color: #d00000;
-  text-align: center;
-  margin: 20px 0;
-  font-weight: bold;
+.empty p {
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   BOTÓN VOLVER
+========================= */
+
+ion-content > ion-button:last-child {
+  margin-top: 22px;
+
+  margin-bottom: 5px;
+
+  --color: white;
+
+  --border-color: rgba(255, 255, 255, 0.75);
+
+  --border-radius: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   TABLET / PC
+========================= */
+
+@media (min-width: 700px) {
+
+  ion-content {
+    --padding-start: 25px;
+    --padding-end: 25px;
+  }
+
+  ion-card {
+    max-width: 1000px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
+
+  ion-card-content {
+    padding: 15px;
+  }
+
+  ion-card:not(.form-card) ion-button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================
+   CELULAR PEQUEÑO
+========================= */
+
+@media (max-width: 380px) {
+
+  ion-card:not(.form-card) h2 {
+    font-size: 16px;
+  }
+
+}
+
+
+
+/* =========================
+   CORRECCIÓN ENCABEZADO
+========================= */
+
+/* Barra superior */
+ion-header ion-toolbar {
+  --background: #ffffff;
+  --color: #374151;
+}
+
+ion-header ion-title {
+  color: #374151 !important;
+}
+
+ion-header ion-back-button {
+  --color: #374151;
+}
+
+
+/* TÍTULO PRINCIPAL */
+ion-content h1 {
+  color: #ffffff !important;
+
+  font-size: 26px;
+
+  font-weight: 700;
+
+  margin-top: 0;
+}
+
+
+/* DESCRIPCIÓN PRINCIPAL */
+ion-content p {
+  color: #ffffff !important;
+}
+
+
+/* Mantener textos de las tarjetas oscuros */
+ion-card p {
+  color: #64748b !important;
+}
+
+ion-card p strong {
+  color: #334155 !important;
+}
+
+
+/* BOTÓN NUEVO */
+ion-content > ion-button:first-of-type {
+  --background: floralwhite;
+
+  --color: #0756a8;
+
+  --border-radius: 10px;
+
+  font-weight: 700;
 }

@@ -1,84 +1,123 @@
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>Equipos</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/admin"
+        text="">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Gestión de Equipos
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content class="ion-padding">
 
-  <h1>Equipos</h1>
+  <!-- ENCABEZADO -->
+  <!--<div class="header-section">
+    <div>
+      <h1>Equipos</h1>
+      <p>
+        Administra los equipos registrados en el sistema.
+      </p>
+    </div>-->
 
-  <p>
-    Gestiona los equipos registrados en el sistema.
-  </p>
 
-  <ion-button
-    expand="block"
-    (click)="abrirFormulario()">
+    <div class="page-header">
 
-    + NUEVO EQUIPO
+      <div>
 
-  </ion-button>
+        
+        <h1>
+          Equipos
+        </h1>
+
+        <p>
+          Gestiona los equipos registrados.
+        </p>
+
+      </div>
+
+    
+  </div>
+
+
+  <ion-button 
+  expand="block"
+  class="nuevo-button"
+  (click)="abrirFormulario()">
+
+  + NUEVO EQUIPO
+
+</ion-button>
 
   <!-- FORMULARIO -->
-
-  <ion-card *ngIf="mostrarFormulario">
+  <ion-card
+    *ngIf="mostrarFormulario"
+    class="form-card">
 
     <ion-card-content>
 
-      <h2>
-        {{ editando ? 'Editar equipo' : 'Nuevo equipo' }}
-      </h2>
+      <div class="form-header">
+        <div>
+          <h2>
+            {{ editando ? 'Editar equipo' : 'Nuevo equipo' }}
+          </h2>
+
+          <p>
+            {{ editando
+              ? 'Actualice la información del equipo.'
+              : 'Ingrese los datos del nuevo equipo.'
+            }}
+          </p>
+        </div>
+      </div>
 
       <!-- NOMBRE -->
-
       <ion-item>
-
         <ion-label position="stacked">
           Nombre *
         </ion-label>
 
         <ion-input
           [(ngModel)]="nuevoEquipo.nombre"
-          placeholder="Ingrese el nombre">
+          placeholder="Ingrese el nombre del equipo">
         </ion-input>
-
       </ion-item>
 
-      <!-- CODIGO -->
-
+      <!-- CÓDIGO -->
       <ion-item>
-
         <ion-label position="stacked">
           Código *
         </ion-label>
 
         <ion-input
           [(ngModel)]="nuevoEquipo.codigo"
-          placeholder="Ingrese el código">
+          placeholder="Ej. CAM-001">
         </ion-input>
-
       </ion-item>
 
-      <!-- DESCRIPCION -->
-
+      <!-- DESCRIPCIÓN -->
       <ion-item>
-
         <ion-label position="stacked">
           Descripción
         </ion-label>
 
         <ion-textarea
           [(ngModel)]="nuevoEquipo.descripcion"
-          placeholder="Ingrese una descripción">
+          placeholder="Ingrese una descripción del equipo"
+          rows="4">
         </ion-textarea>
-
       </ion-item>
 
-      <!-- CLIENTE ID -->
-
+      <!-- CLIENTE -->
       <ion-item>
-
         <ion-label position="stacked">
           Cliente ID
         </ion-label>
@@ -88,137 +127,182 @@
           [(ngModel)]="nuevoEquipo.clienteId"
           placeholder="Opcional">
         </ion-input>
-
       </ion-item>
 
-      <!-- ACTIVO -->
-
-      <ion-item>
-
+      <!-- ESTADO -->
+      <ion-item class="toggle-item">
         <ion-label>
           Equipo activo
+          <p>
+            Indica si el equipo se encuentra actualmente operativo.
+          </p>
         </ion-label>
 
         <ion-toggle
           [(ngModel)]="nuevoEquipo.activo">
         </ion-toggle>
-
       </ion-item>
 
       <!-- ERROR -->
-
-      <p
+      <div
         *ngIf="mensajeError"
         class="error-message">
 
         {{ mensajeError }}
 
-      </p>
+      </div>
 
-      <!-- GUARDAR -->
+      <!-- BOTONES -->
+      <div class="form-buttons">
 
-      <ion-button
-        expand="block"
-        (click)="guardarEquipo()"
-        [disabled]="guardando">
+        <ion-button
+          expand="block"
+          (click)="guardarEquipo()"
+          [disabled]="guardando">
 
-        {{ guardando
-          ? 'GUARDANDO...'
-          : (editando
-              ? 'ACTUALIZAR EQUIPO'
-              : 'GUARDAR EQUIPO')
-        }}
+          {{ guardando
+            ? 'GUARDANDO...'
+            : (editando
+                ? 'ACTUALIZAR EQUIPO'
+                : 'GUARDAR EQUIPO')
+          }}
 
-      </ion-button>
+        </ion-button>
 
-      <!-- CANCELAR -->
+        <ion-button
+          expand="block"
+          fill="outline"
+          (click)="cancelarFormulario()"
+          [disabled]="guardando">
 
-      <ion-button
-        expand="block"
-        fill="outline"
-        (click)="cancelarFormulario()"
-        [disabled]="guardando">
+          CANCELAR
 
-        CANCELAR
+        </ion-button>
 
-      </ion-button>
+      </div>
 
     </ion-card-content>
-
   </ion-card>
 
   <!-- CARGANDO -->
-
   <div
     *ngIf="cargando"
     class="loading">
 
-    <p>Cargando equipos...</p>
+    <div class="loading-icon">
+      ⟳
+    </div>
+
+    <h3>Cargando equipos...</h3>
+
+    <p>
+      Espere un momento.
+    </p>
 
   </div>
 
   <!-- LISTA -->
-
   <div
-    *ngIf="!cargando && equipos.length > 0">
+    *ngIf="!cargando && equipos.length > 0"
+    class="equipos-grid">
 
     <ion-card
-      *ngFor="let equipo of equipos">
+      *ngFor="let equipo of equipos"
+      class="equipo-card">
 
       <ion-card-content>
 
-        <h2>
-          {{ equipo.nombre }}
-        </h2>
+        <!-- CABECERA CARD -->
+        <div class="equipo-header">
 
-        <p>
-          <strong>Código:</strong>
-          {{ equipo.codigo }}
-        </p>
+          <div class="equipo-icon">
+            ⚙
+          </div>
 
-        <p *ngIf="equipo.descripcion">
+          <div class="equipo-title">
+            <h2>
+              {{ equipo.nombre }}
+            </h2>
 
-          <strong>Descripción:</strong>
-          {{ equipo.descripcion }}
+            <span class="codigo">
+              {{ equipo.codigo }}
+            </span>
+          </div>
 
-        </p>
+          <span
+            class="estado-badge"
+            [class.inactivo]="!equipo.activo">
 
-        <p>
+            {{ equipo.activo ? 'Activo' : 'Inactivo' }}
 
-          <strong>Cliente ID:</strong>
-          {{ equipo.clienteId || 'Sin asignar' }}
+          </span>
 
-        </p>
+        </div>
 
-        <p>
+        <!-- INFORMACIÓN -->
+        <div class="equipo-info">
 
-          <strong>Estado:</strong>
-          {{ equipo.activo ? 'Activo' : 'Inactivo' }}
+          <div class="info-row">
 
-        </p>
+            <span class="info-label">
+              Código
+            </span>
 
-        <!-- EDITAR -->
+            <strong>
+              {{ equipo.codigo }}
+            </strong>
 
-        <ion-button
-          expand="block"
-          fill="outline"
-          (click)="editarEquipo(equipo)">
+          </div>
 
-          EDITAR
+          <div
+            class="info-row"
+            *ngIf="equipo.descripcion">
 
-        </ion-button>
+            <span class="info-label">
+              Descripción
+            </span>
 
-        <!-- ELIMINAR -->
+            <span>
+              {{ equipo.descripcion }}
+            </span>
 
-        <ion-button
-          expand="block"
-          color="danger"
-          fill="outline"
-          (click)="eliminarEquipo(equipo.id!)">
+          </div>
 
-          ELIMINAR
+          <div class="info-row">
 
-        </ion-button>
+            <span class="info-label">
+              Cliente
+            </span>
+
+            <span>
+              {{ equipo.clienteId || 'Sin asignar' }}
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="acciones">
+
+          <ion-button
+            fill="outline"
+            (click)="editarEquipo(equipo)">
+
+            EDITAR
+
+          </ion-button>
+
+          <ion-button
+            color="danger"
+            fill="outline"
+            (click)="eliminarEquipo(equipo.id!)">
+
+            ELIMINAR
+
+          </ion-button>
+
+        </div>
 
       </ion-card-content>
 
@@ -227,10 +311,13 @@
   </div>
 
   <!-- SIN EQUIPOS -->
-
   <div
     *ngIf="!cargando && equipos.length === 0 && !mensajeError"
     class="empty">
+
+    <div class="empty-icon">
+      ⚙
+    </div>
 
     <h2>No hay equipos registrados</h2>
 
@@ -238,10 +325,17 @@
       Actualmente no existen equipos en el sistema.
     </p>
 
+    <ion-button
+      fill="outline"
+      (click)="abrirFormulario()">
+
+      REGISTRAR EQUIPO
+
+    </ion-button>
+
   </div>
 
   <!-- ERROR -->
-
   <div
     *ngIf="mensajeError && !mostrarFormulario"
     class="error-message">
@@ -251,11 +345,11 @@
   </div>
 
   <!-- VOLVER -->
-
   <ion-button
     expand="block"
     fill="outline"
-    routerLink="/admin">
+    routerLink="/admin"
+    class="volver-btn">
 
     ← VOLVER AL PANEL
 

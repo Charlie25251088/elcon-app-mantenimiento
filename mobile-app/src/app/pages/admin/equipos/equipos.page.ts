@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 import {
   IonContent,
@@ -15,7 +15,9 @@ import {
   IonLabel,
   IonInput,
   IonTextarea,
-  IonToggle
+  IonToggle,
+  IonButtons,
+  IonBackButton
 } from '@ionic/angular';
 
 import {
@@ -43,7 +45,9 @@ import {
     IonLabel,
     IonInput,
     IonTextarea,
-    IonToggle
+    IonToggle,
+    IonButtons,
+    IonBackButton
   ]
 })
 export class EquiposPage {
@@ -68,7 +72,8 @@ export class EquiposPage {
   };
 
   constructor(
-    private equiposService: EquiposService
+    private equiposService: EquiposService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -84,12 +89,16 @@ export class EquiposPage {
         console.log('Equipos recibidos:', data);
         this.equipos = data;
         this.cargando = false;
+
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error al obtener equipos:', error);
         this.equipos = [];
         this.cargando = false;
         this.mensajeError = 'No se pudieron cargar los equipos.';
+
+        this.cdr.detectChanges();
       }
     });
   }
@@ -125,6 +134,17 @@ export class EquiposPage {
 
     this.mensajeError = '';
     this.mostrarFormulario = true;
+
+    setTimeout(() => {
+  const formulario = document.querySelector('.form-card');
+
+  if (formulario) {
+    formulario.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}, 100);
   }
 
   cancelarFormulario(): void {
