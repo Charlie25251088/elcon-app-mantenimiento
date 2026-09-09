@@ -1,41 +1,759 @@
-h1 {
-  margin-top: 10px;
+/* =========================
+   FONDO GENERAL
+========================= */
+
+ion-content {
+  --background: #075eaf;
+}
+
+.panel-container {
+  padding: 18px 16px 25px;
+}
+
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.welcome-section {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 20px;
+
+  margin-bottom: 26px;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.welcome-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 15px;
+
+  background: floralwhite;
+
+  font-size: 28px;
+}
+
+.welcome-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #dbeafe;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.welcome-text h1 {
+  margin: 0;
+
+  color: #ffffff;
+
   font-size: 26px;
+
+  font-weight: 700;
+}
+
+.welcome-text p {
+  margin: 5px 0 0;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   SECCIONES
+========================= */
+
+.section-heading {
+  margin: 0 0 13px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+.section-heading p {
+  margin: 4px 0 0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 27px;
+}
+
+.stat-card {
+  margin: 0;
+
+  border-radius: 16px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.stat-card ion-card-content {
+  min-height: 125px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 14px 8px;
+
+  text-align: center;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 7px;
+
+  border-radius: 13px;
+
+  font-size: 23px;
+}
+
+.stat-card.total .stat-icon {
+  background: #e0ecff;
+}
+
+.stat-card.programado .stat-icon {
+  background: #fff0d9;
+}
+
+.stat-card.proceso .stat-icon {
+  background: #e0ecff;
+}
+
+.stat-card.completado .stat-icon {
+  background: #dcfce7;
+}
+
+.stat-number {
+  color: #1f2937;
+
+  font-size: 27px;
+
+  line-height: 1;
+
+  font-weight: 800;
+}
+
+.stat-label {
+  margin-top: 5px;
+
+  color: #374151;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   FILTRO
+========================= */
+
+.filter-card {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 16px;
+
+  margin-bottom: 18px;
+
+  border-radius: 16px;
+
+  background: floralwhite;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.filter-card h2 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+.filter-card p {
+  margin: 4px 0 0;
+
+  color: #6b7280;
+
+  font-size: 12px;
+}
+
+.filter-card ion-item {
+  width: 145px;
+
+  --background: transparent;
+
+  --border-color: #e5e7eb;
+
+  --padding-start: 0;
+
+  --inner-padding-end: 0;
+
+  margin: 0;
+}
+
+.filter-card ion-label {
+  color: #374151 !important;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   TARJETAS DE MANTENIMIENTO
+========================= */
+
+.maintenance-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.maintenance-card {
+  margin: 0;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.maintenance-card ion-card-content {
+  padding: 18px;
+}
+
+
+/* =========================
+   ENCABEZADO TARJETA
+========================= */
+
+.maintenance-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding-bottom: 13px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.maintenance-number {
+  display: block;
+
+  color: #6b7280;
+
+  font-size: 12px;
+
   font-weight: 600;
 }
 
-h2 {
-  font-size: 20px;
+.maintenance-header h3 {
+  margin: 4px 0 0;
+
+  color: #1f2937;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   ESTADOS
+========================= */
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.status-badge.programado {
+  background: #fff0d9;
+
+  color: #92400e;
+}
+
+.status-badge.en-proceso {
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+.status-badge.completado {
+  background: #dcfce7;
+
+  color: #166534;
+}
+
+.status-badge.cancelado {
+  background: #fee2e2;
+
+  color: #991b1b;
+}
+
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.maintenance-info {
+  padding: 12px 0 5px;
+}
+
+.maintenance-info p {
+  margin: 6px 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.maintenance-info strong {
+  color: #374151;
+}
+
+
+/* =========================
+   DESCRIPCIÓN
+========================= */
+
+.description-box,
+.observations-box {
+  margin-top: 10px;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  background: #f8fafc;
+}
+
+.description-box span,
+.observations-box span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #374151;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.description-box p,
+.observations-box p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================
+   BOTÓN ACTUALIZAR
+========================= */
+
+.update-button {
+  --background: #075eaf;
+
+  --color: #ffffff;
+
+  --border-radius: 9px;
+
+  margin-top: 15px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-card {
+  margin: 20px 0 0;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.form-card ion-card-content {
+  padding: 18px;
+}
+
+.form-header {
   margin-bottom: 15px;
 }
 
-p {
-  color: #555;
-  line-height: 1.5;
+.form-header h2 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 21px;
+
+  font-weight: 700;
 }
 
-ion-card {
+.form-header p {
+  margin: 5px 0 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+.selected-info {
+  padding: 12px;
+
+  margin-bottom: 12px;
+
+  border-radius: 10px;
+
+  background: #f8fafc;
+}
+
+.selected-info p {
+  margin: 6px 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.selected-info strong {
+  color: #374151;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.form-card ion-item {
+  --background: transparent;
+
+  --border-color: #e5e7eb;
+
+  --padding-start: 0;
+
+  --inner-padding-end: 0;
+
+  margin-bottom: 7px;
+}
+
+.form-card ion-label {
+  color: #374151 !important;
+
+  font-weight: 600;
+}
+
+.form-buttons {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
   margin-top: 20px;
 }
 
-ion-button {
-  margin-top: 12px;
+.save-button {
+  --background: #075eaf;
+
+  --color: #ffffff;
+
+  --border-radius: 9px;
+
+  font-weight: 700;
 }
+
+.cancel-button {
+  --color: #64748b;
+
+  --border-color: #94a3b8;
+
+  --border-radius: 9px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   CARGANDO
+========================= */
 
 .loading {
+  padding: 35px 20px;
+
   text-align: center;
-  margin-top: 30px;
+
+  color: #ffffff;
 }
+
+.loading-icon {
+  font-size: 28px;
+
+  margin-bottom: 8px;
+}
+
+
+/* =========================
+   VACÍO
+========================= */
 
 .empty {
+  padding: 35px 20px;
+
   text-align: center;
-  margin-top: 40px;
+
+  color: #ffffff;
 }
 
+.empty-icon {
+  font-size: 40px;
+
+  margin-bottom: 8px;
+}
+
+.empty h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+}
+
+.empty p {
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
 .error-message {
-  color: #d32f2f;
-  background: #ffebee;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 15px;
+  padding: 12px 14px;
+
+  margin-bottom: 15px;
+
+  border-radius: 10px;
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+  border: 1px solid #fecaca;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   CERRAR SESIÓN
+========================= */
+
+.logout-button {
+  margin-top: 25px;
+
+  margin-bottom: 10px;
+
+  --border-radius: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width: 700px) {
+
+  .panel-container {
+    max-width: 900px;
+
+    margin: 0 auto;
+  }
+
+}
+
+
+/* =========================
+   CELULAR PEQUEÑO
+========================= */
+
+@media (max-width: 480px) {
+
+  .panel-container {
+    padding: 14px 12px 20px;
+  }
+
+  .welcome-section {
+    padding: 17px;
+  }
+
+  .welcome-icon {
+    width: 50px;
+    height: 50px;
+
+    font-size: 24px;
+  }
+
+  .welcome-text h1 {
+    font-size: 22px;
+  }
+
+  .stats-grid {
+    gap: 10px;
+  }
+
+  .stat-card ion-card-content {
+    min-height: 115px;
+
+    padding: 11px 5px;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+
+    font-size: 21px;
+  }
+
+  .stat-number {
+    font-size: 25px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .filter-card {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .filter-card ion-item {
+    width: 100%;
+  }
+
+  .maintenance-header {
+    flex-direction: column;
+  }
+
+  .status-badge {
+    align-self: flex-start;
+  }
+
 }

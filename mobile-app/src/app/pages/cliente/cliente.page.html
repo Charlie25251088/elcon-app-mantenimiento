@@ -1,131 +1,288 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mis Mantenimientos</ion-title>
+    <ion-title>Panel del Cliente</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
 
-  <h1>Mis Mantenimientos</h1>
+  <div class="cliente-panel">
 
-  <p>
-    Consulte los mantenimientos realizados y programados
-    de sus equipos.
-  </p>
+    <!-- =========================
+         ENCABEZADO
+    ========================== -->
 
-  <!-- CARGANDO -->
+    <div class="cliente-header">
 
-  <div
-    *ngIf="cargando"
-    class="loading">
+      <div class="cliente-icon">
+        👤
+      </div>
 
-    <p>
-      Cargando mantenimientos...
-    </p>
+      <div class="cliente-header-text">
+
+        <span class="panel-label">
+          PANEL DEL CLIENTE
+        </span>
+
+        <h1>
+          Mis mantenimientos
+        </h1>
+
+        <p>
+          Consulte el estado de los trabajos realizados y programados.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         TÍTULO
+    ========================== -->
+
+    <div class="section-heading">
+
+      <div>
+        <h2>Mis mantenimientos</h2>
+
+        <p>
+          Información de los trabajos de sus equipos
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         CARGANDO
+    ========================== -->
+
+    <div
+      *ngIf="cargando"
+      class="loading">
+
+      <div class="loading-icon">
+        🔄
+      </div>
+
+      <p>
+        Cargando mantenimientos...
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         ERROR
+    ========================== -->
+
+    <div
+      *ngIf="mensajeError"
+      class="error-message">
+
+      ⚠️ {{ mensajeError }}
+
+    </div>
+
+
+    <!-- =========================
+         LISTA
+    ========================== -->
+
+    <div
+      *ngIf="!cargando && mantenimientos.length > 0"
+      class="mantenimientos-list">
+
+      <ion-card
+        *ngFor="let mantenimiento of mantenimientos"
+        class="mantenimiento-card">
+
+        <ion-card-content>
+
+          <!-- CABECERA DE TARJETA -->
+
+          <div class="mantenimiento-header">
+
+            <div class="mantenimiento-icon">
+              🔧
+            </div>
+
+            <div class="mantenimiento-title">
+
+              <span>
+                Mantenimiento #{{ mantenimiento.id }}
+              </span>
+
+              <h3>
+                {{ mantenimiento.equipo?.nombre || 'Equipo' }}
+              </h3>
+
+            </div>
+
+          </div>
+
+
+          <!-- INFORMACIÓN -->
+
+          <div class="info-grid">
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Equipo
+              </span>
+
+              <span class="info-value">
+                {{ mantenimiento.equipo?.nombre || 'No disponible' }}
+              </span>
+
+            </div>
+
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Código
+              </span>
+
+              <span class="info-value">
+                {{ mantenimiento.equipo?.codigo || 'No disponible' }}
+              </span>
+
+            </div>
+
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Fecha
+              </span>
+
+              <span class="info-value">
+                {{ mantenimiento.fecha | date:'dd/MM/yyyy HH:mm' }}
+              </span>
+
+            </div>
+
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Tipo
+              </span>
+
+              <span class="info-value">
+                {{ mantenimiento.tipo }}
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- DESCRIPCIÓN -->
+
+          <div class="detalle">
+
+            <span class="detalle-label">
+              Descripción
+            </span>
+
+            <p>
+              {{ mantenimiento.descripcion }}
+            </p>
+
+          </div>
+
+
+          <!-- ESTADO -->
+
+          <div class="estado-row">
+
+            <span class="estado-label">
+              Estado
+            </span>
+
+            <span
+              class="estado-badge"
+              [class.programado]="mantenimiento.estado === 'Programado'"
+              [class.proceso]="mantenimiento.estado === 'En proceso'"
+              [class.completado]="mantenimiento.estado === 'Completado'"
+              [class.cancelado]="mantenimiento.estado === 'Cancelado'">
+
+              {{ mantenimiento.estado }}
+
+            </span>
+
+          </div>
+
+
+          <!-- OBSERVACIONES -->
+
+          <div
+            *ngIf="mantenimiento.observaciones"
+            class="detalle observaciones">
+
+            <span class="detalle-label">
+              Observaciones
+            </span>
+
+            <p>
+              {{ mantenimiento.observaciones }}
+            </p>
+
+          </div>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+
+    <!-- =========================
+         SIN MANTENIMIENTOS
+    ========================== -->
+
+    <div
+      *ngIf="
+        !cargando &&
+        mantenimientos.length === 0 &&
+        !mensajeError
+      "
+      class="empty">
+
+      <div class="empty-icon">
+        📋
+      </div>
+
+      <h2>
+        No hay mantenimientos
+      </h2>
+
+      <p>
+        Actualmente no existen mantenimientos registrados
+        para sus equipos.
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         CERRAR SESIÓN
+    ========================== -->
+
+    <ion-button
+      expand="block"
+      color="danger"
+      class="logout-button"
+      (click)="cerrarSesion()">
+
+      CERRAR SESIÓN
+
+    </ion-button>
 
   </div>
-
-  <!-- ERROR -->
-
-  <div
-    *ngIf="mensajeError"
-    class="error-message">
-
-    {{ mensajeError }}
-
-  </div>
-
-  <!-- LISTA -->
-
-  <div
-    *ngIf="!cargando && mantenimientos.length > 0">
-
-    <ion-card
-      *ngFor="let mantenimiento of mantenimientos">
-
-      <ion-card-content>
-
-        <h2>
-          Mantenimiento #{{ mantenimiento.id }}
-        </h2>
-
-        <p>
-            <!--<strong>Equipo ID:</strong>
-          {{ mantenimiento.equipoId }}-->
-
-          <strong>Equipo:</strong>
-          {{ mantenimiento.equipo?.nombre }}
-
-          <br>
-
-          <strong>Código:</strong>
-        {{ mantenimiento.equipo?.codigo }}
-        </p>
-
-        <p>
-          <strong>Fecha:</strong>
-          {{ mantenimiento.fecha | date:'dd/MM/yyyy HH:mm' }}
-        </p>
-
-        <p>
-          <strong>Tipo:</strong>
-          {{ mantenimiento.tipo }}
-        </p>
-
-        <p>
-          <strong>Descripción:</strong>
-          {{ mantenimiento.descripcion }}
-        </p>
-
-        <p>
-          <strong>Estado:</strong>
-          {{ mantenimiento.estado }}
-        </p>
-
-        <p *ngIf="mantenimiento.observaciones">
-
-          <strong>Observaciones:</strong>
-          {{ mantenimiento.observaciones }}
-
-        </p>
-
-      </ion-card-content>
-
-    </ion-card>
-
-  </div>
-
-  <!-- SIN MANTENIMIENTOS -->
-
-  <div
-    *ngIf="
-      !cargando &&
-      mantenimientos.length === 0 &&
-      !mensajeError
-    "
-    class="empty">
-
-    <h2>
-      No hay mantenimientos
-    </h2>
-
-    <p>
-      Actualmente no existen mantenimientos registrados
-      para sus equipos.
-    </p>
-
-  </div>
-
-  <!-- CERRAR SESIÓN -->
-
-  <ion-button
-    expand="block"
-    color="danger"
-    fill="outline"
-    (click)="cerrarSesion()">
-
-    CERRAR SESIÓN
-
-  </ion-button>
 
 </ion-content>

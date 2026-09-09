@@ -1,4 +1,3 @@
-//import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -52,6 +51,7 @@ import {
 export class TecnicoPage {
 
   mantenimientos: Mantenimiento[] = [];
+  mantenimientosFiltrados: Mantenimiento[] = [];
 
   cargando = false;
   guardando = false;
@@ -60,16 +60,18 @@ export class TecnicoPage {
 
   mensajeError = '';
 
-  /*constructor(
-    private mantenimientosService: MantenimientosService,
-    private router: Router
-  ) {}*/
+  filtroEstado = 'Todos';
 
-    constructor(
-  private mantenimientosService: MantenimientosService,
-  private router: Router,
-  private cdr: ChangeDetectorRef
-) {}
+  totalMantenimientos = 0;
+  mantenimientosProgramados = 0;
+  mantenimientosEnProceso = 0;
+  mantenimientosCompletados = 0;
+
+  constructor(
+    private mantenimientosService: MantenimientosService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.cargarMantenimientos();
@@ -84,7 +86,7 @@ export class TecnicoPage {
       .obtenerMisMantenimientosTecnico()
       .subscribe({
 
-        /*next: (data: Mantenimiento[]) => {
+        next: (data: Mantenimiento[]) => {
 
           console.log(
             'Mantenimientos del técnico:',
@@ -92,21 +94,14 @@ export class TecnicoPage {
           );
 
           this.mantenimientos = data;
+
+          this.calcularResumen();
+          this.aplicarFiltro();
+
           this.cargando = false;
-        },*/
 
-        next: (data: Mantenimiento[]) => {
-
-  console.log(
-    'Mantenimientos del técnico:',
-    data
-  );
-
-  this.mantenimientos = data;
-  this.cargando = false;
-
-  this.cdr.detectChanges();
-},
+          this.cdr.detectChanges();
+        },
 
         error: (error) => {
 
@@ -116,6 +111,8 @@ export class TecnicoPage {
           );
 
           this.mantenimientos = [];
+          this.mantenimientosFiltrados = [];
+
           this.cargando = false;
 
           if (error.error?.mensaje) {
@@ -125,8 +122,68 @@ export class TecnicoPage {
             this.mensajeError =
               'No se pudieron cargar los mantenimientos.';
           }
+
+          this.cdr.detectChanges();
         }
       });
+  }
+
+  calcularResumen(): void {
+
+    this.totalMantenimientos =
+      this.mantenimientos.length;
+
+    this.mantenimientosProgramados =
+      this.mantenimientos.filter(
+        m =>
+          this.normalizarEstado(m.estado)
+          === 'programado'
+      ).length;
+
+    this.mantenimientosEnProceso =
+      this.mantenimientos.filter(
+        m =>
+          this.normalizarEstado(m.estado)
+          === 'en proceso'
+      ).length;
+
+    this.mantenimientosCompletados =
+      this.mantenimientos.filter(
+        m =>
+          this.normalizarEstado(m.estado)
+          === 'completado'
+      ).length;
+  }
+
+  aplicarFiltro(): void {
+
+    if (this.filtroEstado === 'Todos') {
+
+      this.mantenimientosFiltrados =
+        [...this.mantenimientos];
+
+      return;
+    }
+
+    this.mantenimientosFiltrados =
+      this.mantenimientos.filter(
+        m =>
+          this.normalizarEstado(m.estado)
+          === this.normalizarEstado(
+            this.filtroEstado
+          )
+      );
+  }
+
+  cambiarFiltro(): void {
+    this.aplicarFiltro();
+  }
+
+  normalizarEstado(estado: string | undefined): string {
+
+    return (estado || '')
+      .trim()
+      .toLowerCase();
   }
 
   seleccionarMantenimiento(
@@ -136,6 +193,22 @@ export class TecnicoPage {
     this.mantenimientoSeleccionado = {
       ...mantenimiento
     };
+
+    setTimeout(() => {
+
+      const formulario =
+        document.querySelector('.form-card');
+
+      if (formulario) {
+
+        formulario.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+
+      }
+
+    }, 100);
   }
 
   cancelarEdicion(): void {
@@ -156,19 +229,27 @@ export class TecnicoPage {
     this.mensajeError = '';
 
     const mantenimientoActualizado: Mantenimiento = {
+
       id: this.mantenimientoSeleccionado.id,
+
       equipoId:
         this.mantenimientoSeleccionado.equipoId,
+
       fecha:
         this.mantenimientoSeleccionado.fecha,
+
       tipo:
         this.mantenimientoSeleccionado.tipo,
+
       descripcion:
         this.mantenimientoSeleccionado.descripcion,
+
       estado:
         this.mantenimientoSeleccionado.estado,
+
       observaciones:
         this.mantenimientoSeleccionado.observaciones,
+
       tecnicoId:
         this.mantenimientoSeleccionado.tecnicoId
     };
@@ -187,6 +268,7 @@ export class TecnicoPage {
           );
 
           this.guardando = false;
+
           this.mantenimientoSeleccionado =
             undefined;
 
@@ -203,9 +285,12 @@ export class TecnicoPage {
           this.guardando = false;
 
           if (error.error?.mensaje) {
+
             this.mensajeError =
               error.error.mensaje;
+
           } else {
+
             this.mensajeError =
               'No se pudo actualizar el mantenimiento.';
           }
@@ -215,29 +300,19 @@ export class TecnicoPage {
 
   cerrarSesion(): void {
 
+    const elementoActivo =
+      document.activeElement;
+
+    if (
+      elementoActivo instanceof HTMLElement
+    ) {
+      elementoActivo.blur();
+    }
+
     localStorage.removeItem('token');
     localStorage.removeItem('email');
     localStorage.removeItem('roles');
 
     this.router.navigate(['/login']);
   }
-
-    /*cerrarSesion(): void {
-
-  const elementoActivo =
-    document.activeElement;
-
-  if (
-    elementoActivo instanceof HTMLElement
-  ) {
-    elementoActivo.blur();
-  }
-
-  localStorage.removeItem('token');
-  localStorage.removeItem('email');
-  localStorage.removeItem('roles');
-
-  this.router.navigate(['/login']);
-}*/
-
 }

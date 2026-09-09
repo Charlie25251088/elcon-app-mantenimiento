@@ -1,29 +1,547 @@
-ion-card {
-  margin-top: 16px;
+/* =========================
+   FONDO GENERAL
+========================= */
+
+ion-content {
+  --background: #0d63b8;
 }
 
-ion-card h2 {
-  font-size: 20px;
-  margin-bottom: 16px;
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.cliente-panel {
+  min-height: 100%;
+  padding: 14px 12px 25px;
 }
 
-ion-card p {
-  margin: 8px 0;
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.cliente-header {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 18px;
+
+  margin-bottom: 24px;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   ICONO CLIENTE
+========================= */
+
+.cliente-icon {
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: floralwhite;
+
+  font-size: 29px;
+}
+
+
+/* =========================
+   TEXTO ENCABEZADO
+========================= */
+
+.cliente-header-text {
+  flex: 1;
+}
+
+.panel-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #dbeafe;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.cliente-header-text h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 25px;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+.cliente-header-text p {
+  margin: 6px 0 0;
+
+  color: #e0efff;
+
+  font-size: 13px;
+
   line-height: 1.4;
 }
 
-.loading {
-  text-align: center;
-  margin-top: 30px;
+
+/* =========================
+   SECCIÓN
+========================= */
+
+.section-heading {
+  margin: 0 8px 14px;
 }
 
-.empty {
-  text-align: center;
-  margin-top: 40px;
+.section-heading h2 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 21px;
+
+  font-weight: 800;
 }
+
+.section-heading p {
+  margin: 4px 0 0;
+
+  color: #dbeafe;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+.mantenimientos-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+/* =========================
+   TARJETA
+========================= */
+
+.mantenimiento-card {
+  margin: 0;
+
+  border-radius: 17px;
+
+  background: floralwhite;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.12);
+
+  overflow: hidden;
+}
+
+.mantenimiento-card ion-card-content {
+  padding: 18px;
+}
+
+
+/* =========================
+   CABECERA TARJETA
+========================= */
+
+.mantenimiento-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding-bottom: 14px;
+
+  margin-bottom: 14px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mantenimiento-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #fff0d9;
+
+  font-size: 24px;
+}
+
+.mantenimiento-title {
+  flex: 1;
+}
+
+.mantenimiento-title span {
+  display: block;
+
+  color: #6b7280;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.mantenimiento-title h3 {
+  margin: 4px 0 0;
+
+  color: #1f2937;
+
+  font-size: 18px;
+
+  font-weight: 800;
+}
+
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 15px;
+}
+
+.info-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.info-label {
+  color: #6b7280;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.info-value {
+  color: #374151;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  line-height: 1.35;
+}
+
+
+/* =========================
+   DETALLES
+========================= */
+
+.detalle {
+  padding: 12px;
+
+  margin-top: 10px;
+
+  border-radius: 10px;
+
+  background: #f8fafc;
+}
+
+.detalle-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #6b7280;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.detalle p {
+  margin: 0;
+
+  color: #374151;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   ESTADO
+========================= */
+
+.estado-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 14px;
+
+  padding-top: 13px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.estado-label {
+  color: #374151;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.estado-badge {
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+.estado-badge.programado {
+  background: #fff0d9;
+
+  color: #9a6700;
+}
+
+.estado-badge.proceso {
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+.estado-badge.completado {
+  background: #dcfce7;
+
+  color: #166534;
+}
+
+.estado-badge.cancelado {
+  background: #fee2e2;
+
+  color: #991b1b;
+}
+
+
+/* =========================
+   OBSERVACIONES
+========================= */
+
+.observaciones {
+  background: #f3f4f6;
+}
+
+
+/* =========================
+   CARGANDO
+========================= */
+
+.loading {
+  padding: 40px 20px;
+
+  text-align: center;
+
+  color: white;
+}
+
+.loading-icon {
+  font-size: 30px;
+
+  margin-bottom: 8px;
+}
+
+.loading p {
+  margin: 0;
+
+  color: #e0efff;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   ERROR
+========================= */
 
 .error-message {
-  color: #d32f2f;
-  margin-top: 20px;
+  margin: 15px 0;
+
+  padding: 13px;
+
+  border-radius: 10px;
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+  border: 1px solid #fecaca;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   VACÍO
+========================= */
+
+.empty {
+  margin: 30px 10px;
+
+  padding: 30px 20px;
+
+  border-radius: 16px;
+
+  background: floralwhite;
+
   text-align: center;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.10);
+}
+
+.empty-icon {
+  font-size: 38px;
+
+  margin-bottom: 10px;
+}
+
+.empty h2 {
+  margin: 0 0 8px;
+
+  color: #1f2937;
+
+  font-size: 19px;
+
+  font-weight: 800;
+}
+
+.empty p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   CERRAR SESIÓN
+========================= */
+
+.logout-button {
+  margin-top: 25px;
+
+  margin-bottom: 10px;
+
+  --border-radius: 10px;
+
+  font-weight: 800;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 420px) {
+
+  .cliente-panel {
+    padding: 12px 10px 20px;
+  }
+
+  .cliente-header {
+    padding: 16px;
+
+    gap: 12px;
+  }
+
+  .cliente-icon {
+    width: 50px;
+    height: 50px;
+
+    font-size: 25px;
+  }
+
+  .cliente-header-text h1 {
+    font-size: 22px;
+  }
+
+  .cliente-header-text p {
+    font-size: 12px;
+  }
+
+  .mantenimiento-card ion-card-content {
+    padding: 16px;
+  }
+
+  .mantenimiento-title h3 {
+    font-size: 17px;
+  }
+
+  .info-grid {
+    gap: 10px;
+  }
+
 }
